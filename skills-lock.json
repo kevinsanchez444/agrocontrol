@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "android-development": {
+      "source": "dpconde/claude-android-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "cd57be7ef5414c15665156dbdb458c70712799a3dbc6a069c5cb951914ba6c19"
+    },
+    "git-commit": {
+      "source": "ankit1598/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/git-commit/SKILL.md",
+      "computedHash": "126a741f87d212799c50fa93613cf4097e6f49a2b5870bd8d0859345f210fb02"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "computedHash": "7e3c9cd74e9e2b4828527a857170e86310f2dab5ea8030a9043df2c7e6c88857"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "128fac78002d916c8ca908245d398e634f540d8bcf20915b2b2359aeb18eba59"
+    }
+  }
+}
