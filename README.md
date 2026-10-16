@@ -128,17 +128,18 @@ Guardián (auditoría transversal continua en todas las fases)
 
 ### Skills instaladas
 
-Skills de `OpenCode` requeridas para trabajar con el stack del proyecto:
+Las skills viven en **`.opencode/skills/<nombre>/SKILL.md`**, dentro del repositorio, y su origen y versión quedan fijados en **`skills-lock.json`** (raíz). Así todo el equipo comparte el mismo inventario al clonar el proyecto.
 
-| Skill | Justificación |
-|---|---|
-| `[SKILL_ANDROID]` (p. ej. Android/Gradle) | Ayuda a generar `build.gradle.kts`, fragments, ViewBinding y Navigation según las buenas prácticas de AndroidX. | 
-| `[SKILL_SQL_POSTGRES]` (p. ej. SQL/PostgreSQL) | Redacción y revisión de DDL, índices y políticas RLS para el esquema de Supabase. |
-| `[SKILL_SUPABASE]` | Configuración del cliente Supabase, Auth con `JWT` y operaciones PostgREST. |
-| `[SKILL_GIT]` | Uso correcto de `GitFlow`, historial de commits y flujo de Pull Requests. |
-| `[SKILL_IA_GEN]` (p. ej. prompt/API de IA) | Integración del chat del asesor agrícola y construcción del prompt especializado. |
+| Skill | Necesidad del stack | Justificación |
+|---|---|---|
+| `android-development` | `[SKILL_ANDROID]` | Genera `build.gradle.kts`, fragments, ViewBinding y Navigation según las buenas prácticas de AndroidX. |
+| `supabase-postgres-best-practices` | `[SKILL_SQL_POSTGRES]` y `[SKILL_SUPABASE]` | Redacción y revisión de DDL, índices, políticas RLS, Auth con `JWT` y operaciones PostgREST. |
+| `git-commit` | `[SKILL_GIT]` | Uso correcto de `GitFlow`, historial de commits y flujo de Pull Requests. |
+| `skill-creator` | — | Crear y mantener nuevas skills del equipo. |
 
-> **Nota:** todos los integrantes deben instalar exactamente las mismas skills y versiones, documentando cualquier alta o baja en este apartado.
+> **Pendiente:** `[SKILL_IA_GEN]` (integración del chat del asesor agrícola y construcción del prompt especializado) aún no está instalada.
+
+> **Nota:** todos los integrantes deben tener exactamente las mismas skills y versiones. Para instalar o actualizar, use el CLI de skills y verifique que el resultado quede en `.opencode/skills/`; cualquier alta o baja se documenta en este apartado y en `skills-lock.json`.
 
 ### Servidores MCP integrados
 
@@ -231,7 +232,7 @@ Todos los integrantes deben usar **exactamente la misma** estructura de carpetas
 ```text
 AgroControl/
 ├── .opencode/
-│   ├── agents/          # definiciones de los 9 agentes
+│   ├── agents/              # definiciones de los 9 agentes
 │   │   ├── interrogador.md
 │   │   ├── arquitecto.md
 │   │   ├── disenador.md
@@ -241,13 +242,19 @@ AgroControl/
 │   │   ├── revisor.md
 │   │   ├── liberador.md
 │   │   └── guardian.md
-│   └── skills/          # skills compartidas del equipo
+│   └── skills/              # skills compartidas del equipo
+│       ├── android-development/
+│       ├── supabase-postgres-best-practices/
+│       ├── git-commit/
+│       └── skill-creator/
+├── opencode.json            # agente por defecto + servidores MCP
+├── skills-lock.json         # origen y versión de las skills
 ├── .env.example
 ├── README.md
 └── ...
 ```
 
-2. **Configuración de OpenCode:** sincronice el archivo `opencode.json` de la raíz (agente por defecto, lista de servidores MCP de Supabase y GitHub, y referencias a las skills) con el que publica el equipo `[ARCHIVO_CONFIG_EQUIPO]`.
+2. **Configuración de OpenCode:** el `opencode.json` de la raíz define el agente por defecto (`default_agent: interrogador`) y los servidores MCP de Supabase y GitHub (declarados con `enabled: false` hasta configurar las URLs reales). Sincronícelo con el que publica el equipo `[ARCHIVO_CONFIG_EQUIPO]`.
 
 3. **Variables de entorno:** genere su `.env` local a partir del mismo `.env.example` versionado (paso 4.5). Las credenciales personales de Supabase/Looker Studio se comparten por un canal seguro (p. ej. gestor de contraseñas del equipo), nunca por el repositorio.
 
