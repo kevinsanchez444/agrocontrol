@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">agentes</string>
     <string name="action_settings">Settings</string>
+    <string name="send_email">Send email</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -43,4 +44,34 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <!-- Módulo de lotes (Integrante 2). -->
+    <string name="lotes_titulo">Mis lotes</string>
+    <string name="lotes_agregar">Agregar nuevo lote</string>
+    <string name="lotes_vacio">Aún no tienes lotes. ¡Crea el primero!</string>
+    <string name="lotes_cargando">Cargando lotes</string>
+    <string name="lote_hectareas_formato">%1$s ha</string>
+    <string name="lote_seleccionado">Lote «%1$s» seleccionado (lote_id: %2$s)</string>
+
+    <string name="nuevo_lote_titulo">Nuevo lote</string>
+    <string name="nuevo_lote_nombre">Nombre del lote</string>
+    <string name="nuevo_lote_cultivo">Cultivo</string>
+    <string name="nuevo_lote_hectareas">Hectáreas</string>
+    <string name="nuevo_lote_guardar">Guardar lote</string>
+    <string name="nuevo_lote_cancelar">Cancelar</string>
+    <string name="nuevo_lote_guardado">Lote guardado correctamente.</string>
+
+    <string name="error_nombre_obligatorio">El nombre es obligatorio.</string>
+    <string name="error_cultivo_obligatorio">Selecciona un cultivo.</string>
+    <string name="error_hectareas">Las hectáreas deben ser mayores que 0.</string>
+
+    <string name="cultivo_cafe">Café</string>
+    <string name="cultivo_platano">Plátano</string>
+    <string name="cultivo_aguacate">Aguacate</string>
+
+    <string-array name="cultivos">
+        <item>@string/cultivo_cafe</item>
+        <item>@string/cultivo_platano</item>
+        <item>@string/cultivo_aguacate</item>
+    </string-array>
 </resources>
