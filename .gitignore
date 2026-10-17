@@ -7,12 +7,16 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/deviceManager.xml
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+# Archivo generado por Gradle (auto-provisioning de la JVM del daemon)
+/gradle/gradle-daemon-jvm.properties
 
 # Secretos locales (nunca versionar; solo .env.example)
 .env

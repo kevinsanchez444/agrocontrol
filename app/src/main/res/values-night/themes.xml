@@ -1,7 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Tema oscuro basado en la paleta del prototipo AgroApp. -->
     <style name="Base.Theme.Agentes" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/agro_verde_dark</item>
+        <item name="colorOnPrimary">@color/agro_texto</item>
+        <item name="colorPrimaryContainer">@color/agro_verde_claro_dark</item>
+        <item name="colorOnPrimaryContainer">@color/agro_verde_texto_dark</item>
+        <item name="colorSecondary">@color/agro_verde_dark</item>
+        <item name="colorOnSecondary">@color/agro_texto</item>
+        <item name="colorSecondaryContainer">@color/agro_verde_claro_dark</item>
+        <item name="colorOnSecondaryContainer">@color/agro_verde_texto_dark</item>
+        <item name="android:colorBackground">@color/agro_fondo_dark</item>
+        <item name="colorSurface">@color/agro_card_dark</item>
+        <item name="colorSurfaceVariant">@color/agro_verde_claro_dark</item>
+        <item name="colorSurfaceContainerLowest">@color/agro_card_dark</item>
+        <item name="colorSurfaceContainerLow">@color/agro_card_dark</item>
+        <item name="colorSurfaceContainer">@color/agro_card_dark</item>
+        <item name="colorSurfaceContainerHigh">@color/agro_card_dark</item>
+        <item name="colorSurfaceContainerHighest">@color/agro_card_dark</item>
+        <item name="colorOnSurface">@color/agro_texto_dark</item>
+        <item name="colorOnSurfaceVariant">@color/agro_texto_mutado_dark</item>
+        <item name="colorOutline">@color/agro_borde_dark</item>
+        <item name="colorOutlineVariant">@color/agro_borde_dark</item>
     </style>
 </resources>

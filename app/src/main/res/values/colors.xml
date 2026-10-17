@@ -2,4 +2,24 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta del prototipo AgroApp (doc/Prototipo AgroApp.html) -->
+    <!-- Tema claro -->
+    <color name="agro_verde">#2E7D32</color>
+    <color name="agro_verde_oscuro">#1B5E20</color>
+    <color name="agro_verde_claro">#E3F1E2</color>
+    <color name="agro_fondo">#EEF2EA</color>
+    <color name="agro_borde">#D5DFD1</color>
+    <color name="agro_texto">#1D2A1C</color>
+    <color name="agro_texto_mutado">#667A63</color>
+
+    <!-- Tema oscuro -->
+    <color name="agro_verde_dark">#66BB6A</color>
+    <color name="agro_verde_claro_dark">#27402A</color>
+    <color name="agro_verde_texto_dark">#B9E0B6</color>
+    <color name="agro_fondo_dark">#121A12</color>
+    <color name="agro_card_dark">#1D281D</color>
+    <color name="agro_borde_dark">#2F402E</color>
+    <color name="agro_texto_dark">#E6EFE3</color>
+    <color name="agro_texto_mutado_dark">#93A890</color>
 </resources>

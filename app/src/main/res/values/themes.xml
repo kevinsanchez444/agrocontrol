@@ -1,14 +1,32 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Tema claro basado en la paleta del prototipo AgroApp. -->
     <style name="Base.Theme.Agentes" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/agro_verde</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/agro_verde_claro</item>
+        <item name="colorOnPrimaryContainer">@color/agro_verde_oscuro</item>
+        <item name="colorSecondary">@color/agro_verde</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/agro_verde_claro</item>
+        <item name="colorOnSecondaryContainer">@color/agro_verde_oscuro</item>
+        <item name="android:colorBackground">@color/agro_fondo</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorSurfaceVariant">@color/agro_verde_claro</item>
+        <item name="colorSurfaceContainerLowest">@color/white</item>
+        <item name="colorSurfaceContainerLow">@color/white</item>
+        <item name="colorSurfaceContainer">@color/white</item>
+        <item name="colorSurfaceContainerHigh">@color/white</item>
+        <item name="colorSurfaceContainerHighest">@color/white</item>
+        <item name="colorOnSurface">@color/agro_texto</item>
+        <item name="colorOnSurfaceVariant">@color/agro_texto_mutado</item>
+        <item name="colorOutline">@color/agro_borde</item>
+        <item name="colorOutlineVariant">@color/agro_borde</item>
     </style>
 
     <style name="Theme.Agentes" parent="Base.Theme.Agentes">
-        <!-- Transparent system bars for edge-to-edge. -->
+        <!-- Barra de estado del color primario, como la barra superior del prototipo. -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
