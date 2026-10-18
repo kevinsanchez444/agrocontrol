@@ -71,6 +71,12 @@ public class LotesFragment extends Fragment {
                 abrirFormularioNuevoLote();
             }
         });
+        binding.btnLotesNuevoLista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirFormularioNuevoLote();
+            }
+        });
         binding.btnLotesReintentar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +93,19 @@ public class LotesFragment extends Fragment {
                 });
 
         consumirArgumentoFormulario();
+    }
+
+    /**
+     * La carga inicial vive aquí (y no en onViewCreated) para que la lista se refresque
+     * cada vez que se vuelve al fragment: al regresar del detalle tras editar o eliminar
+     * un lote, los cambios se ven sin recargar a mano.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (binding == null) {
+            return;
+        }
         cargarLotes();
     }
 

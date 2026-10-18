@@ -37,8 +37,32 @@ public final class LotesContrato {
     /** Clave informativa con el nombre del lote (para el título del detalle). */
     public static final String ARG_LOTE_NOMBRE = "lote_nombre";
 
+    /**
+     * Clave informativa con el cultivo del lote (se muestra en una etiqueta estilo chip,
+     * igual que en la tarjeta de la lista).
+     */
+    public static final String ARG_LOTE_CULTIVO = "lote_cultivo";
+
+    /**
+     * Clave informativa con las hectáreas del lote como texto crudo (sin formatear);
+     * el formateo se hace en la vista del detalle.
+     */
+    public static final String ARG_LOTE_HECTARES = "lote_hectareas";
+
     /** Clave con la que el formulario avisa que guardó un lote y hay que recargar la lista. */
     public static final String RESULT_NUEVO_LOTE = "resultado_nuevo_lote";
+
+    /**
+     * Clave del argumento (Serializable) con el que la hoja inferior recibe el {@link Lote}
+     * a editar; si está presente, el formulario abre en modo edición prellenado.
+     */
+    public static final String ARG_LOTE_EDITAR = "lote_editar";
+
+    /**
+     * Clave del FragmentResult con el que la hoja inferior devuelve a la pantalla de
+     * detalle el {@link Lote} ya actualizado en el servidor.
+     */
+    public static final String ARG_RESULT_LOTE = "resultado_lote_actualizado";
 
     private LotesContrato() {
     }
@@ -48,6 +72,17 @@ public final class LotesContrato {
         Bundle argumentos = new Bundle();
         argumentos.putString(ARG_LOTE_ID, lote.getId());
         argumentos.putString(ARG_LOTE_NOMBRE, lote.getNombre());
+        argumentos.putString(ARG_LOTE_CULTIVO, lote.getCultivo());
+        argumentos.putString(ARG_LOTE_HECTARES, String.valueOf(lote.getHectareas()));
         return argumentos;
+    }
+
+    /** Instancia la hoja inferior en modo edición, prellenada con el lote recibido. */
+    public static NuevoLoteFragment nuevaHojaEdicion(Lote lote) {
+        NuevoLoteFragment hoja = new NuevoLoteFragment();
+        Bundle argumentos = new Bundle();
+        argumentos.putSerializable(ARG_LOTE_EDITAR, lote);
+        hoja.setArguments(argumentos);
+        return hoja;
     }
 }

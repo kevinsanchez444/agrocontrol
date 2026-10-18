@@ -15,6 +15,7 @@
 
     <!-- Pantalla de inicio -->
     <string name="home_greeting_title">¡Hola, Agricultor!</string>
+    <string name="home_greeting_pattern">Hola %1$s Bienvenido a AgroControl</string>
     <string name="home_greeting_subtitle">Resumen de tu finca</string>
     <string name="home_lotes_count_pattern">%1$d lotes</string>
     <string name="home_tile_lotes">Mis lotes</string>
@@ -46,6 +47,7 @@
     <string name="detalle_back">Volver</string>
     <string name="detalle_missing_id">Falta el identificador del lote.</string>
     <string name="detalle_empty">Sin información del lote.</string>
+    <string name="detalle_dato_vacio">—</string>
 
     <!-- Módulo Finanzas (stub provisorio, Integrante 3) -->
     <string name="fin_empty">Primero crea un lote para registrar movimientos.</string>
@@ -65,6 +67,15 @@
     <string name="nuevo_lote_guardar">Guardar lote</string>
     <string name="nuevo_lote_cancelar">Cancelar</string>
     <string name="nuevo_lote_guardado">Lote guardado correctamente.</string>
+    <string name="nuevo_lote_editar_titulo">Editar lote</string>
+    <string name="nuevo_lote_actualizar">Guardar cambios</string>
+    <string name="lote_actualizado">Lote actualizado correctamente.</string>
+    <string name="lote_eliminado">Lote eliminado.</string>
+    <string name="detalle_editar">Editar</string>
+    <string name="detalle_eliminar">Eliminar</string>
+    <string name="eliminar_titulo">Eliminar lote</string>
+    <string name="eliminar_mensaje">¿Eliminar «%1$s»? Esta acción no se puede deshacer.</string>
+    <string name="eliminar_confirmar">Eliminar</string>
     <string name="error_nombre_obligatorio">El nombre es obligatorio.</string>
     <string name="error_cultivo_obligatorio">Selecciona un cultivo.</string>
     <string name="error_hectareas">Las hectáreas deben ser mayores que 0.</string>
