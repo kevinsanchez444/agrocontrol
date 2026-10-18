@@ -1,4 +1,7 @@
 <resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Espaciado AgroControl (estandar de feature/navegacion) -->
     <dimen name="agro_screen_padding">14dp</dimen>
     <dimen name="agro_card_gap">10dp</dimen>
     <dimen name="agro_card_padding">12dp</dimen>

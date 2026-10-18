@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Grafo plano de 5 destinos. PROPIEDAD EXCLUSIVA DEL INTEGRANTE 5.
+    Grafo de destinos. PROPIEDAD EXCLUSIVA DEL INTEGRANTE 5.
     Los integrantes 2, 3 y 4 NO editan este archivo: solicitan acciones o
     argumentos por escrito al Integrante 5 (contratos congelados por el Arquitecto).
 -->
@@ -8,7 +8,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.agentes.ui.login.LoginFragment"
+        android:label="@string/login_titulo"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"

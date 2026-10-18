@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Paleta AgroControl (derivada 1:1 del CSS del prototipo, modo noche) -->
     <color name="agro_bg">#121A12</color>
