@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/agro_screen_padding"
+    tools:context=".ui.lotes.LoteDetalleFragment">
+
+    <!-- Contenido real: aquí vive el detalle del Integrante 2 -->
+    <ScrollView
+        android:id="@+id/state_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_detalle_lote_id"
+                style="@style/TextAgro.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="lote_id: demo-uuid" />
+
+            <Button
+                android:id="@+id/btn_detalle_back"
+                style="@style/Widget.Agro.Button.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detalle_back" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Estado vacío -->
+    <LinearLayout
+        android:id="@+id/state_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lotes_empty_emoji"
+            android:textSize="40sp" />
+
+        <TextView
+            style="@style/TextAgro.Muted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/detalle_empty" />
+    </LinearLayout>
+
+    <!-- Estado de carga -->
+    <LinearLayout
+        android:id="@+id/state_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/TextAgro.Muted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/state_loading" />
+    </LinearLayout>
+
+    <!-- Estado de error (lote_id ausente o vacío) -->
+    <LinearLayout
+        android:id="@+id/state_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/state_emoji_error"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/text_detalle_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/detalle_missing_id"
+            android:textColor="@color/agro_error" />
+
+        <Button
+            android:id="@+id/btn_detalle_error_back"
+            style="@style/Widget.Agro.Button.Secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/detalle_back" />
+    </LinearLayout>
+</FrameLayout>

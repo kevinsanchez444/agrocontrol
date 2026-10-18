@@ -1,6 +1,9 @@
 package com.example.agentes;
 
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+
+        // Destinos de nivel superior: sin flecha "up" en el toolbar
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.homeFragment,
+                R.id.lotesFragment,
+                R.id.finanzasFragment,
+                R.id.asesorFragment
+        ).build();
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
@@ -125,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.content.bottomNav, navController);
     }
 
     @Override
