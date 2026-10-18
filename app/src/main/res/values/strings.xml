@@ -55,4 +55,25 @@
     <string name="ia_welcome">Hola, soy tu asesor de café, plátano y aguacate. ¿En qué te ayudo?</string>
     <string name="ia_input_hint">Escribe tu pregunta…</string>
     <string name="ia_send">➤</string>
+
+    <!-- Módulo de lotes (Integrante 2) - recursos requeridos por LotesAdapter/NuevoLoteFragment -->
+    <string name="lote_hectareas_formato">%1$s ha</string>
+    <string name="nuevo_lote_titulo">Nuevo lote</string>
+    <string name="nuevo_lote_nombre">Nombre del lote</string>
+    <string name="nuevo_lote_cultivo">Cultivo</string>
+    <string name="nuevo_lote_hectareas">Hectáreas</string>
+    <string name="nuevo_lote_guardar">Guardar lote</string>
+    <string name="nuevo_lote_cancelar">Cancelar</string>
+    <string name="nuevo_lote_guardado">Lote guardado correctamente.</string>
+    <string name="error_nombre_obligatorio">El nombre es obligatorio.</string>
+    <string name="error_cultivo_obligatorio">Selecciona un cultivo.</string>
+    <string name="error_hectareas">Las hectáreas deben ser mayores que 0.</string>
+    <string name="cultivo_cafe">Café</string>
+    <string name="cultivo_platano">Plátano</string>
+    <string name="cultivo_aguacate">Aguacate</string>
+    <string-array name="cultivos">
+        <item>@string/cultivo_cafe</item>
+        <item>@string/cultivo_platano</item>
+        <item>@string/cultivo_aguacate</item>
+    </string-array>
 </resources>
