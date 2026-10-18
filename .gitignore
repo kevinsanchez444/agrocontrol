@@ -1,0 +1,20 @@
+﻿# Archivos locales
+local.properties
+
+# Gradle y archivos compilados
+.gradle/
+**/.gradle/
+build/
+**/build/
+*.apk
+*.aab
+*.dex
+*.class
+
+# Configuración del IDE
+.idea/
+*.iml
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

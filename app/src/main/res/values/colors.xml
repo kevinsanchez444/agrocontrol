@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorUsuario">#007AFF</color>
+    <color name="colorUsuarioTexto">#FFFFFF</color>
+    <color name="colorIA">#E5E5EA</color>
+    <color name="colorIAtexto">#000000</color>
+    <color name="colorError">#B00020</color>
+    <color name="colorFondo">#FFFFFF</color>
+</resources>
