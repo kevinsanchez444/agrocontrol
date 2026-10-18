@@ -41,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+        // El login es pantalla completa: se ocultan el toolbar y el FAB de la plantilla.
+        navController.addOnDestinationChangedListener((controlador, destino, argumentos) -> {
+            boolean esLogin = destino.getId() == R.id.loginFragment;
+            binding.toolbar.setVisibility(esLogin ? View.GONE : View.VISIBLE);
+            binding.fab.setVisibility(esLogin ? View.GONE : View.VISIBLE);
+        });
+
         // Botón flotante original
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override

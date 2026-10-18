@@ -7,6 +7,36 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <!-- ================= Login AgroControl ================= -->
+    <string name="login_titulo">AgroControl</string>
+    <string name="login_subtitulo">Ingresa a tu finca digital</string>
+    <string name="login_campo_nombre">Nombre</string>
+    <string name="login_campo_correo">Correo electrónico</string>
+    <string name="login_campo_contrasena">Contraseña</string>
+    <string name="login_recordarme">Recordarme</string>
+    <string name="login_olvide_contrasena">¿Olvidaste tu contraseña?</string>
+    <string name="login_boton">Iniciar sesión</string>
+    <string name="login_en_curso">Iniciando sesión…</string>
+    <string name="login_error_nombre">Escribe tu nombre</string>
+    <string name="login_error_correo_obligatorio">Escribe tu correo electrónico</string>
+    <string name="login_error_correo_invalido">El correo electrónico no es válido</string>
+    <string name="login_error_contrasena_obligatoria">Escribe tu contraseña</string>
+    <string name="login_error_contrasena_corta">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="login_error_credenciales">Correo o contraseña incorrectos</string>
+    <string name="login_error_red">No se pudo conectar. Revisa tu conexión e inténtalo de nuevo.</string>
+    <string name="login_error_servidor">No fue posible iniciar sesión. Inténtalo más tarde.</string>
+
+    <!-- Recuperar contraseña -->
+    <string name="recuperar_titulo">Recuperar contraseña</string>
+    <string name="recuperar_descripcion">Escribe tu correo y te enviaremos un enlace para crear una nueva contraseña.</string>
+    <string name="recuperar_campo_correo">Correo electrónico</string>
+    <string name="recuperar_boton">Enviar enlace</string>
+    <string name="recuperar_cancelar">Cancelar</string>
+    <string name="recuperar_en_curso">Enviando…</string>
+    <string name="recuperar_exito">Si el correo está registrado, recibirás un enlace para recuperar tu contraseña.</string>
+    <string name="recuperar_error_red">No se pudo enviar el enlace. Revisa tu conexión e inténtalo de nuevo.</string>
+    <string name="recuperar_error_servidor">No fue posible enviar el enlace. Inténtalo más tarde.</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -36,7 +66,7 @@
         placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
         convallis.\n\n
         Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        malesuada fames ac turpis. In volutpat arcu ut felis sagittis, in finibus massa
         gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
         libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
         sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus

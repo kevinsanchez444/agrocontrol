@@ -54,4 +54,13 @@ public class SupabaseClient {
     public static OkHttpClient getClient() {
         return client;
     }
+
+    // Getters para el módulo de autenticación (AuthRepository / SupabaseConfig)
+    public static String getSupabaseUrl() {
+        return SUPABASE_URL;
+    }
+
+    public static String getAnonKey() {
+        return SUPABASE_ANON_KEY;
+    }
 }
