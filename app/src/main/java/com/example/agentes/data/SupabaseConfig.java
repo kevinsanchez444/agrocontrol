@@ -78,7 +78,9 @@ public final class SupabaseConfig {
     }
 
     public static boolean haySesion() {
-        return token != null && !token.isEmpty() && usuarioId != null && !usuarioId.isEmpty();
+        // El MVP autentica con nombre + correo contra la tabla usuarios, sin JWT:
+        // la sesión se considera activa cuando hay usuarioId.
+        return usuarioId != null && !usuarioId.isEmpty();
     }
 
     /** Token JWT actual o cadena vacía si no hay sesión. */

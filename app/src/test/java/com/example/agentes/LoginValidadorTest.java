@@ -8,7 +8,7 @@ import com.example.agentes.ui.login.LoginValidador;
 import org.junit.Test;
 
 /**
- * Pruebas unitarias de las reglas de validación del formulario de login.
+ * Pruebas unitarias de las reglas de validación del formulario de login/registro.
  */
 public class LoginValidadorTest {
 
@@ -66,25 +66,31 @@ public class LoginValidadorTest {
         assertFalse(LoginValidador.esCorreoValido(null));
     }
 
-    // ---------- Contraseña ----------
+    // ---------- Coincidencia de nombres (credencial junto al correo) ----------
 
     @Test
-    public void contrasena_en_longitud_minima_es_valida() {
-        assertTrue(LoginValidador.esContrasenaValida("abc123"));
+    public void nombres_coinciden_ignorando_mayusculas() {
+        assertTrue(LoginValidador.nombresCoinciden("juan Pérez", "Juan Pérez"));
     }
 
     @Test
-    public void contrasena_mas_corta_que_la_minima_es_invalida() {
-        assertFalse(LoginValidador.esContrasenaValida("abc12"));
+    public void nombres_coinciden_con_espacios_en_los_extremos() {
+        assertTrue(LoginValidador.nombresCoinciden("  Juan Pérez  ", "Juan Pérez"));
     }
 
     @Test
-    public void contrasena_vacia_es_invalida() {
-        assertFalse(LoginValidador.esContrasenaValida(""));
+    public void nombres_distintos_no_coinciden() {
+        assertFalse(LoginValidador.nombresCoinciden("Pedro", "Juan Pérez"));
     }
 
     @Test
-    public void contrasena_nula_es_invalida() {
-        assertFalse(LoginValidador.esContrasenaValida(null));
+    public void nombre_vacio_no_coincide_con_registrado() {
+        assertFalse(LoginValidador.nombresCoinciden("", "Juan Pérez"));
+    }
+
+    @Test
+    public void nombres_nulos_no_coinciden() {
+        assertFalse(LoginValidador.nombresCoinciden(null, "Juan Pérez"));
+        assertFalse(LoginValidador.nombresCoinciden("Juan Pérez", null));
     }
 }

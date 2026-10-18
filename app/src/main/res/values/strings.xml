@@ -12,30 +12,29 @@
     <string name="login_subtitulo">Ingresa a tu finca digital</string>
     <string name="login_campo_nombre">Nombre</string>
     <string name="login_campo_correo">Correo electrónico</string>
-    <string name="login_campo_contrasena">Contraseña</string>
     <string name="login_recordarme">Recordarme</string>
-    <string name="login_olvide_contrasena">¿Olvidaste tu contraseña?</string>
+    <string name="login_no_registrado">¿No estás registrado?</string>
+    <string name="login_registrate">Regístrate</string>
     <string name="login_boton">Iniciar sesión</string>
     <string name="login_en_curso">Iniciando sesión…</string>
     <string name="login_error_nombre">Escribe tu nombre</string>
     <string name="login_error_correo_obligatorio">Escribe tu correo electrónico</string>
     <string name="login_error_correo_invalido">El correo electrónico no es válido</string>
-    <string name="login_error_contrasena_obligatoria">Escribe tu contraseña</string>
-    <string name="login_error_contrasena_corta">La contraseña debe tener al menos 6 caracteres</string>
-    <string name="login_error_credenciales">Correo o contraseña incorrectos</string>
+    <string name="login_error_no_registrado">No estás registrado. Crea tu cuenta con el enlace \"Regístrate\".</string>
+    <string name="login_error_nombre_no_coincide">El nombre no coincide con la cuenta registrada</string>
+    <string name="login_error_permisos">Sin acceso a la base de datos. Pide al administrador que habilite los permisos de la tabla usuarios.</string>
     <string name="login_error_red">No se pudo conectar. Revisa tu conexión e inténtalo de nuevo.</string>
     <string name="login_error_servidor">No fue posible iniciar sesión. Inténtalo más tarde.</string>
 
-    <!-- Recuperar contraseña -->
-    <string name="recuperar_titulo">Recuperar contraseña</string>
-    <string name="recuperar_descripcion">Escribe tu correo y te enviaremos un enlace para crear una nueva contraseña.</string>
-    <string name="recuperar_campo_correo">Correo electrónico</string>
-    <string name="recuperar_boton">Enviar enlace</string>
-    <string name="recuperar_cancelar">Cancelar</string>
-    <string name="recuperar_en_curso">Enviando…</string>
-    <string name="recuperar_exito">Si el correo está registrado, recibirás un enlace para recuperar tu contraseña.</string>
-    <string name="recuperar_error_red">No se pudo enviar el enlace. Revisa tu conexión e inténtalo de nuevo.</string>
-    <string name="recuperar_error_servidor">No fue posible enviar el enlace. Inténtalo más tarde.</string>
+    <!-- Registro de cuenta -->
+    <string name="registro_titulo">Crear cuenta</string>
+    <string name="registro_descripcion">Solo necesitas tu nombre y tu correo. No usamos contraseñas.</string>
+    <string name="registro_boton">Registrarse</string>
+    <string name="registro_cancelar">Cancelar</string>
+    <string name="registro_en_curso">Creando cuenta…</string>
+    <string name="registro_error_ya_registrado">Ese correo ya está registrado. Inicia sesión con tu nombre.</string>
+    <string name="registro_error_red">No se pudo crear la cuenta. Revisa tu conexión e inténtalo de nuevo.</string>
+    <string name="registro_error_servidor">No fue posible crear la cuenta. Inténtalo más tarde.</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

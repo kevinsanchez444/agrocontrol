@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/agro_surface"
     android:orientation="vertical"
     android:padding="@dimen/agro_card_padding"
-    tools:context=".ui.login.RecuperarPasswordFragment">
+    tools:context=".ui.login.RegistrarseFragment">
 
     <TextView
         android:id="@+id/texto_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/recuperar_titulo"
+        android:text="@string/registro_titulo"
         android:textAppearance="@style/TextAgro.Title" />
 
     <TextView
@@ -21,16 +20,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="@string/recuperar_descripcion"
+        android:text="@string/registro_descripcion"
         android:textAppearance="@style/TextAgro.Muted" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/campo_nombre"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/agro_card_gap"
+        android:hint="@string/login_campo_nombre">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName|textCapWords"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/campo_correo"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/agro_card_gap"
-        android:hint="@string/recuperar_campo_correo">
+        android:layout_marginTop="@dimen/agro_gap_small"
+        android:hint="@string/login_campo_correo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -57,7 +71,7 @@
         android:textAppearance="@style/TextAgro.Muted"
         android:textColor="@color/agro_error"
         android:visibility="gone"
-        tools:text="No se pudo enviar el enlace."
+        tools:text="Ese correo ya está registrado."
         tools:visibility="visible" />
 
     <LinearLayout
@@ -72,16 +86,16 @@
             style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/recuperar_cancelar"
+            android:text="@string/registro_cancelar"
             android:textColor="@color/agro_muted" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/boton_enviar"
+            android:id="@+id/boton_registrarse"
             style="@style/Widget.Agro.Button.Primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/agro_gap_small"
-            android:text="@string/recuperar_boton" />
+            android:text="@string/registro_boton" />
     </LinearLayout>
 
 </LinearLayout>

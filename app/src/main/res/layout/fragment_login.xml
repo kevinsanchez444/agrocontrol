@@ -48,7 +48,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/texto_titulo" />
 
-        <!-- Campos -->
+        <!-- Credenciales: nombre + correo (la tabla usuarios no tiene contraseñas) -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/campo_nombre"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -89,28 +89,7 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/campo_contrasena"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/agro_gap_small"
-            android:layout_marginTop="@dimen/agro_card_gap"
-            android:layout_marginEnd="@dimen/agro_gap_small"
-            android:hint="@string/login_campo_contrasena"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/campo_correo">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Recordarme + enlace de recuperación -->
+        <!-- Recordarme -->
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_recordarme"
             android:layout_width="wrap_content"
@@ -120,24 +99,42 @@
             android:checked="true"
             android:text="@string/login_recordarme"
             android:textColor="@color/agro_on_surface"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/campo_contrasena"
-            app:layout_constraintTop_toBottomOf="@id/campo_contrasena" />
+            app:layout_constraintStart_toStartOf="@id/campo_correo"
+            app:layout_constraintTop_toBottomOf="@id/campo_correo" />
 
-        <TextView
-            android:id="@+id/texto_olvide_contrasena"
+        <!-- Enlace a registro -->
+        <LinearLayout
+            android:id="@+id/fila_registro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/agro_gap_small"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="@string/login_olvide_contrasena"
-            android:textAppearance="@style/TextAgro.Muted"
-            android:textColor="@color/agro_primary"
-            app:layout_constraintBaseline_toBaselineOf="@id/checkbox_recordarme"
-            app:layout_constraintEnd_toEndOf="@id/campo_contrasena"
-            app:layout_constraintTop_toBottomOf="@id/campo_contrasena" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/campo_correo"
+            app:layout_constraintStart_toStartOf="@id/campo_correo"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_recordarme">
+
+            <TextView
+                android:id="@+id/texto_no_registrado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_no_registrado"
+                android:textAppearance="@style/TextAgro.Muted"
+                android:textColor="@color/agro_on_surface" />
+
+            <TextView
+                android:id="@+id/texto_registrarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/login_registrate"
+                android:textAppearance="@style/TextAgro.Muted"
+                android:textColor="@color/agro_primary"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <!-- Acción principal -->
         <com.google.android.material.button.MaterialButton
@@ -147,9 +144,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/agro_card_gap"
             android:text="@string/login_boton"
-            app:layout_constraintEnd_toEndOf="@id/campo_contrasena"
-            app:layout_constraintStart_toStartOf="@id/campo_contrasena"
-            app:layout_constraintTop_toBottomOf="@id/checkbox_recordarme" />
+            app:layout_constraintEnd_toEndOf="@id/campo_correo"
+            app:layout_constraintStart_toStartOf="@id/campo_correo"
+            app:layout_constraintTop_toBottomOf="@id/fila_registro" />
 
         <!-- Estados de carga y error -->
         <ProgressBar
@@ -172,10 +169,10 @@
             android:textAppearance="@style/TextAgro.Muted"
             android:textColor="@color/agro_error"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@id/campo_contrasena"
-            app:layout_constraintStart_toStartOf="@id/campo_contrasena"
+            app:layout_constraintEnd_toEndOf="@id/campo_correo"
+            app:layout_constraintStart_toStartOf="@id/campo_correo"
             app:layout_constraintTop_toBottomOf="@id/progress_carga"
-            tools:text="Correo o contraseña incorrectos"
+            tools:text="No estás registrado. Crea tu cuenta con el enlace Regístrate."
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

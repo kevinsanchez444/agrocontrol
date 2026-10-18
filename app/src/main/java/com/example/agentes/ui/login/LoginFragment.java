@@ -17,11 +17,17 @@ import com.example.agentes.databinding.FragmentLoginBinding;
 /**
  * Pantalla de inicio de sesión de AgroControl.
  *
- * <p>Campos: nombre visible, correo y contraseña; acciones: iniciar sesión,
- * "Recordarme" (persiste la sesión en SharedPreferences) y enlace de
- * recuperación de contraseña. La autenticación va contra Supabase Auth.</p>
+ * <p>Credenciales: <b>nombre visible + correo electrónico</b> (la tabla
+ * {@code usuarios} de Supabase no tiene contraseñas). Acciones: iniciar
+ * sesión, casilla "Recordarme" y enlace "¿No estás registrado? Regístrate",
+ * que abre el bottom sheet de registro.</p>
  */
 public class LoginFragment extends Fragment {
+
+    private static final String RESULTADO_REGISTRO = "registro_exitoso";
+    private static final String ARG_USUARIO_ID = "usuario_id";
+    private static final String ARG_NOMBRE = "nombre";
+    private static final String ARG_CORREO = "email";
 
     private FragmentLoginBinding binding;
     private AuthRepository repositorio;
@@ -41,7 +47,7 @@ public class LoginFragment extends Fragment {
         repositorio = new AuthRepository();
 
         // Sesión guardada con "Recordarme": entrar directo a la app.
-        if (SupabaseConfig.haySesion()) {
+        if (SupabaseConfig.haySesion() || SupabaseConfig.restaurarSesion(requireContext())) {
             navegarAApp();
             return;
         }
@@ -50,9 +56,20 @@ public class LoginFragment extends Fragment {
 
         binding.botonIniciarSesion.setOnClickListener(v -> intentarLogin());
 
-        binding.textoOlvideContrasena.setOnClickListener(v ->
-                new RecuperarPasswordFragment().show(
-                        getParentFragmentManager(), "recuperar_password"));
+        binding.textoRegistrarse.setOnClickListener(v ->
+                new RegistrarseFragment().show(getParentFragmentManager(), "registro"));
+
+        // Tras registrarse en el bottom sheet se entra directamente a la app.
+        getParentFragmentManager().setFragmentResultListener(
+                RESULTADO_REGISTRO, getViewLifecycleOwner(), (clave, datos) -> {
+                    SupabaseConfig.setSesion("", "",
+                            datos.getString(ARG_USUARIO_ID, ""),
+                            datos.getString(ARG_NOMBRE, ""),
+                            datos.getString(ARG_CORREO, ""));
+                    SupabaseConfig.guardarSesion(requireContext(),
+                            binding.checkboxRecordarme.isChecked());
+                    navegarAApp();
+                });
     }
 
     private void intentarLogin() {
@@ -62,7 +79,6 @@ public class LoginFragment extends Fragment {
 
         String nombre = textoDe(binding.campoNombre.getEditText());
         String correo = textoDe(binding.campoCorreo.getEditText());
-        String contrasena = textoDe(binding.campoContrasena.getEditText());
 
         limpiarErrores();
 
@@ -78,26 +94,21 @@ public class LoginFragment extends Fragment {
             mostrarErrorCampo(binding.campoCorreo, R.string.login_error_correo_invalido);
             return;
         }
-        if (contrasena.isEmpty()) {
-            mostrarErrorCampo(binding.campoContrasena, R.string.login_error_contrasena_obligatoria);
-            return;
-        }
-        if (!LoginValidador.esContrasenaValida(contrasena)) {
-            mostrarErrorCampo(binding.campoContrasena, R.string.login_error_contrasena_corta);
-            return;
-        }
 
         mostrarCarga(true);
 
-        repositorio.iniciarSesion(correo.trim(), contrasena, new AuthRepository.CallbackSesion() {
+        repositorio.iniciarSesion(correo.trim(), new AuthRepository.CallbackConsulta() {
             @Override
-            public void onSesionIniciada(String accessToken, String refreshToken, String usuarioId) {
-                // El nombre es local (identificador visible); el correo lo aporta Supabase.
-                SupabaseConfig.setSesion(accessToken, refreshToken, usuarioId,
-                        nombre.trim(), correo.trim());
+            public void onResultado(String usuarioId, String nombreRegistrado) {
+                mostrarCarga(false);
+                if (!LoginValidador.nombresCoinciden(nombre, nombreRegistrado)) {
+                    binding.campoNombre.setError(getString(R.string.login_error_nombre_no_coincide));
+                    binding.campoNombre.requestFocus();
+                    return;
+                }
+                SupabaseConfig.setSesion("", "", usuarioId, nombre.trim(), correo.trim());
                 SupabaseConfig.guardarSesion(requireContext(),
                         binding.checkboxRecordarme.isChecked());
-                mostrarCarga(false);
                 navegarAApp();
             }
 
@@ -113,7 +124,6 @@ public class LoginFragment extends Fragment {
     private void limpiarErrores() {
         binding.campoNombre.setError(null);
         binding.campoCorreo.setError(null);
-        binding.campoContrasena.setError(null);
         binding.textoError.setVisibility(View.GONE);
     }
 
@@ -132,8 +142,11 @@ public class LoginFragment extends Fragment {
     }
 
     private String mensajeDe(int tipoError) {
-        if (tipoError == AuthRepository.ERROR_CREDENCIALES) {
-            return getString(R.string.login_error_credenciales);
+        if (tipoError == AuthRepository.ERROR_NO_REGISTRADO) {
+            return getString(R.string.login_error_no_registrado);
+        }
+        if (tipoError == AuthRepository.ERROR_PERMISOS) {
+            return getString(R.string.login_error_permisos);
         }
         if (tipoError == AuthRepository.ERROR_RED) {
             return getString(R.string.login_error_red);
