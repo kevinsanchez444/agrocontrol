@@ -1,13 +1,7 @@
 package com.example.agentes;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -16,7 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.agentes.databinding.ActivityMainBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 
@@ -49,18 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 R.id.finanzasFragment,
                 R.id.asesorFragment
         ).build();
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        // Botón flotante original
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Probando conexión con Supabase...", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-            }
-        });
+        NavigationUI.setupWithNavController(binding.content.bottomNav, navController);
 
         // -------------------------------------------------------------
         // PRUEBA DE CONEXIÓN A SUPABASE
@@ -95,49 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    // Método para guardar/insertar registros en Supabase
-    private void insertarDatosEnTabla(String nombreTabla, String jsonDatos) {
-        Request request = SupabaseClient.crearPeticionInsertar(nombreTabla, jsonDatos);
-        OkHttpClient client = SupabaseClient.getClient();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("SUPABASE", "Error al insertar: " + e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try (Response r = response) {
-                    String cuerpo = r.body() != null ? r.body().string() : "";
-                    if (r.isSuccessful()) {
-                        Log.d("SUPABASE", "Registro guardado exitosamente: " + cuerpo);
-                    } else {
-                        Log.e("SUPABASE", "Error al guardar. Código: " + r.code() + " | " + cuerpo);
-                    }
-                }
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.content.bottomNav, navController);
     }
 
     @Override
