@@ -1,22 +1,27 @@
 package com.example.agentes;
 
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.agentes.databinding.ActivityMainBinding;
+import com.google.android.material.snackbar.Snackbar;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,31 +41,86 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+        // Botón flotante original
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Probando conexión con Supabase...", Snackbar.LENGTH_LONG)
                         .setAnchorView(R.id.fab)
                         .setAction("Action", null).show();
+            }
+        });
+
+        // -------------------------------------------------------------
+        // PRUEBA DE CONEXIÓN A SUPABASE
+        // Cambia "tu_tabla" por el nombre real de una tabla en tu base de datos
+        // -------------------------------------------------------------
+        obtenerDatosDeTabla("categorias");
+    }
+
+    // Método para consultar datos en Supabase
+    private void obtenerDatosDeTabla(String nombreTabla) {
+        Request request = SupabaseClient.crearPeticionObtener(nombreTabla);
+        OkHttpClient client = SupabaseClient.getClient();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("SUPABASE", "Error al conectar: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                // try-with-resources: cierra siempre el body y lee el mensaje real del servidor
+                try (Response r = response) {
+                    String cuerpo = r.body() != null ? r.body().string() : "";
+                    if (r.isSuccessful()) {
+                        Log.d("SUPABASE", "Respuesta recibida: " + cuerpo);
+                    } else {
+                        // El cuerpo trae el motivo exacto: p. ej. "permission denied for table",
+                        // "Invalid API key", "relation ... does not exist"
+                        Log.e("SUPABASE", "Error del servidor. Código: " + r.code() + " | " + cuerpo);
+                    }
+                }
+            }
+        });
+    }
+
+    // Método para guardar/insertar registros en Supabase
+    private void insertarDatosEnTabla(String nombreTabla, String jsonDatos) {
+        Request request = SupabaseClient.crearPeticionInsertar(nombreTabla, jsonDatos);
+        OkHttpClient client = SupabaseClient.getClient();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("SUPABASE", "Error al insertar: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try (Response r = response) {
+                    String cuerpo = r.body() != null ? r.body().string() : "";
+                    if (r.isSuccessful()) {
+                        Log.d("SUPABASE", "Registro guardado exitosamente: " + cuerpo);
+                    } else {
+                        Log.e("SUPABASE", "Error al guardar. Código: " + r.code() + " | " + cuerpo);
+                    }
+                }
             }
         });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
