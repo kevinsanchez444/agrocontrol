@@ -51,7 +51,8 @@ public class RegistrarseFragment extends BottomSheetDialogFragment {
         }
 
         String nombre = textoDe(binding.campoNombre.getEditText()).trim();
-        String correo = textoDe(binding.campoCorreo.getEditText()).trim();
+        String correo = textoDe(binding.campoCorreo.getEditText()).trim()
+                .toLowerCase(java.util.Locale.ROOT);
 
         binding.campoNombre.setError(null);
         binding.campoCorreo.setError(null);
@@ -73,6 +74,9 @@ public class RegistrarseFragment extends BottomSheetDialogFragment {
         repositorio.registrarse(nombre, correo, new AuthRepository.CallbackRegistro() {
             @Override
             public void onRegistrado(String usuarioId) {
+                if (binding == null) {
+                    return; // el bottom sheet ya se cerró
+                }
                 mostrarCarga(false);
                 Bundle datos = new Bundle();
                 datos.putString("usuario_id", usuarioId);
@@ -84,8 +88,16 @@ public class RegistrarseFragment extends BottomSheetDialogFragment {
 
             @Override
             public void onError(int tipoError, String detalle) {
+                if (binding == null) {
+                    return; // el bottom sheet ya se cerró
+                }
                 mostrarCarga(false);
-                binding.textoError.setText(mensajeDe(tipoError));
+                String mensaje = mensajeDe(tipoError);
+                // En compilaciones de depuración se muestra también el motivo real de Supabase.
+                if (com.example.agentes.BuildConfig.DEBUG && detalle != null) {
+                    mensaje += "\n\n" + detalle;
+                }
+                binding.textoError.setText(mensaje);
                 binding.textoError.setVisibility(View.VISIBLE);
             }
         });
@@ -100,6 +112,18 @@ public class RegistrarseFragment extends BottomSheetDialogFragment {
         }
         if (tipoError == AuthRepository.ERROR_LIMITE_INTENTOS) {
             return getString(R.string.registro_error_rate);
+        }
+        if (tipoError == AuthRepository.ERROR_TRIGGER_USUARIOS) {
+            return getString(R.string.registro_error_trigger);
+        }
+        if (tipoError == AuthRepository.ERROR_CONFIRMACION_CORREO) {
+            return getString(R.string.registro_error_confirmacion);
+        }
+        if (tipoError == AuthRepository.ERROR_CORREO_RECHAZADO) {
+            return getString(R.string.registro_error_correo_rechazado);
+        }
+        if (tipoError == AuthRepository.ERROR_CAPTCHA) {
+            return getString(R.string.registro_error_captcha);
         }
         if (tipoError == AuthRepository.ERROR_PERMISOS) {
             return getString(R.string.login_error_permisos);

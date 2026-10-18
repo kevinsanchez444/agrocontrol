@@ -106,7 +106,8 @@ public class LoginFragment extends Fragment {
                     binding.campoNombre.requestFocus();
                     return;
                 }
-                SupabaseConfig.setSesion("", "", usuarioId, nombre.trim(), correo.trim());
+                SupabaseConfig.setSesion("", "", usuarioId, nombre.trim(),
+                        correo.trim().toLowerCase(java.util.Locale.ROOT));
                 SupabaseConfig.guardarSesion(requireContext(),
                         binding.checkboxRecordarme.isChecked());
                 navegarAApp();

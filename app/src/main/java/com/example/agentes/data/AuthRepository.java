@@ -3,6 +3,7 @@ package com.example.agentes.data;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.agentes.SupabaseClient;
 
@@ -11,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.UUID;
 
 import okhttp3.Call;
@@ -44,6 +46,12 @@ public class AuthRepository {
     public static final int ERROR_YA_REGISTRADO = 5;
     public static final int ERROR_REGISTRO_DESHABILITADO = 6;
     public static final int ERROR_LIMITE_INTENTOS = 7;
+    public static final int ERROR_TRIGGER_USUARIOS = 8;
+    public static final int ERROR_CONFIRMACION_CORREO = 9;
+    public static final int ERROR_CORREO_RECHAZADO = 10;
+    public static final int ERROR_CAPTCHA = 11;
+
+    private static final String TAG = "AUTH";
 
     /** Resultado de la consulta de una cuenta existente. */
     public interface CallbackConsulta {
@@ -61,7 +69,9 @@ public class AuthRepository {
     private final Handler hiloPrincipal = new Handler(Looper.getMainLooper());
 
     /** Busca la cuenta por correo; el comparador de nombres lo hace el llamador. */
-    public void iniciarSesion(String correo, CallbackConsulta callback) {
+    public void iniciarSesion(String correoEscrito, CallbackConsulta callback) {
+        // Supabase Auth guarda el correo en minúsculas y "eq." es sensible a mayúsculas.
+        String correo = normalizarCorreo(correoEscrito);
         String url = SupabaseClient.getSupabaseUrl() + "/rest/v1/usuarios?email=eq."
                 + Uri.encode(correo) + "&select=id,nombre";
 
@@ -117,8 +127,11 @@ public class AuthRepository {
      * <p>La contraseña generada es interna: el MVP usa nombre + correo como
      * credenciales y nunca se muestra ni se vuelve a usar.</p>
      */
-    public void registrarse(String nombre, String correo, CallbackRegistro callback) {
-        String contrasenaInterna = UUID.randomUUID().toString();
+    public void registrarse(String nombre, String correoEscrito, CallbackRegistro callback) {
+        String correo = normalizarCorreo(correoEscrito);
+        // Cumple cualquier política de contraseñas de Supabase (minúsculas,
+        // mayúsculas, dígitos y símbolos; > 8 caracteres).
+        String contrasenaInterna = "Ag1!" + UUID.randomUUID();
 
         JSONObject cuerpo = new JSONObject();
         try {
@@ -152,6 +165,15 @@ public class AuthRepository {
                             JSONObject json = new JSONObject(texto);
                             // Sin confirmación de correo viene "id"; con sesión viene "user".
                             JSONObject usuario = json.optJSONObject("user");
+                            JSONObject datosUsuario = usuario != null ? usuario : json;
+                            // Con "Confirm email" activo, un correo ya registrado devuelve
+                            // 200 con un usuario ficticio sin identidades.
+                            JSONArray identidades = datosUsuario.optJSONArray("identities");
+                            if (identidades != null && identidades.length() == 0) {
+                                notificar(callback, ERROR_YA_REGISTRADO,
+                                        "Correo ya registrado (identities vacío)");
+                                return;
+                            }
                             String id = usuario != null ? usuario.optString("id")
                                     : json.optString("id");
                             if (id.isEmpty()) {
@@ -165,35 +187,13 @@ public class AuthRepository {
                         }
                         return;
                     }
-                    notificar(callback, clasificarErrorRegistro(r.code(), texto),
+                    notificar(callback, ErrorRegistro.clasificar(r.code(), texto),
                             "HTTP " + r.code() + ": " + texto);
                 } catch (IOException e) {
                     notificar(callback, ERROR_RED, e.getMessage());
                 }
             }
         });
-    }
-
-    /** Traduce los errores conocidos de GoTrue (signup) a códigos de la app. */
-    private static int clasificarErrorRegistro(int codigoHttp, String cuerpo) {
-        String texto = cuerpo == null ? "" : cuerpo.toLowerCase(java.util.Locale.ROOT);
-        if (texto.contains("user_already_exists")
-                || texto.contains("already registered")
-                || texto.contains("already been registered")) {
-            return ERROR_YA_REGISTRADO;
-        }
-        if (codigoHttp == 429 || texto.contains("rate limit")) {
-            return ERROR_LIMITE_INTENTOS;
-        }
-        if (texto.contains("signups not allowed")
-                || texto.contains("signup is disabled")
-                || texto.contains("email logins not allowed")) {
-            return ERROR_REGISTRO_DESHABILITADO;
-        }
-        if (codigoHttp == 401 || codigoHttp == 403) {
-            return ERROR_PERMISOS;
-        }
-        return ERROR_SERVIDOR;
     }
 
     private static int tipoDeError(int codigoHttp) {
@@ -203,11 +203,17 @@ public class AuthRepository {
         return ERROR_SERVIDOR;
     }
 
+    static String normalizarCorreo(String correo) {
+        return correo == null ? "" : correo.trim().toLowerCase(Locale.ROOT);
+    }
+
     private void notificar(CallbackConsulta callback, int tipo, String detalle) {
+        Log.e(TAG, "Login falló (tipo " + tipo + "): " + detalle);
         hiloPrincipal.post(() -> callback.onError(tipo, detalle));
     }
 
     private void notificar(CallbackRegistro callback, int tipo, String detalle) {
+        Log.e(TAG, "Registro falló (tipo " + tipo + "): " + detalle);
         hiloPrincipal.post(() -> callback.onError(tipo, detalle));
     }
 }

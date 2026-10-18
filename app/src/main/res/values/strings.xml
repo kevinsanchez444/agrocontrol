@@ -36,6 +36,10 @@
     <string name="registro_error_deshabilitado">El registro está deshabilitado en Supabase. Pide al administrador que active el proveedor de Email (Authentication → Providers).</string>
     <string name="registro_error_rate">Demasiados intentos de registro. Espera unos minutos y vuelve a intentarlo.</string>
     <string name="registro_error_red">No se pudo crear la cuenta. Revisa tu conexión e inténtalo de nuevo.</string>
+    <string name="registro_error_trigger">La cuenta no se pudo guardar en la tabla usuarios. El administrador debe ejecutar el script supabase/registro_usuarios.sql en Supabase.</string>
+    <string name="registro_error_confirmacion">Supabase intentó enviar un correo de confirmación y no pudo. El administrador debe desactivar \"Confirm email\" en Authentication → Sign In / Providers → Email.</string>
+    <string name="registro_error_correo_rechazado">Supabase rechazó ese correo. Revisa que esté bien escrito o usa otro.</string>
+    <string name="registro_error_captcha">El registro tiene CAPTCHA activado en Supabase y la app no lo soporta. El administrador debe desactivarlo (Authentication → Attack Protection).</string>
     <string name="registro_error_servidor">No fue posible crear la cuenta. Inténtalo más tarde.</string>
 
     <string name="lorem_ipsum">
