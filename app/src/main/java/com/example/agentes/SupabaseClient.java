@@ -1,5 +1,7 @@
 package com.example.agentes;
 
+import com.example.agentes.data.SupabaseConfig;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -7,7 +9,24 @@ import okhttp3.RequestBody;
 
 public class SupabaseClient {
 
-    private static final String SUPABASE_URL = "https://pyhvhbenqgmgztbkmrgh.supabase.co";
+    /**
+     * URL del proyecto de Supabase. Se declara una sola vez en {@link SupabaseConfig}
+     * para que la autenticación (esta clase) y el módulo de lotes
+     * ({@code LoteRepository}) apunten siempre al mismo proyecto.
+     */
+    private static final String SUPABASE_URL = SupabaseConfig.SUPABASE_URL;
+
+    /**
+     * Clave <b>publicable</b> del proyecto ({@code sb_publishable_...}). La usan
+     * <b>solo los flujos de autenticación</b> ({@code AuthRepository}: login y
+     * registro). NO es un JWT: viaja únicamente en el header {@code apikey};
+     * enviarla como {@code Authorization: Bearer} provoca 401, por eso los
+     * métodos de esta clase solo agregan Bearer si la clave empieza con "eyJ".
+     *
+     * <p>El módulo de lotes NO usa esta clave: {@code LoteRepository} trabaja con
+     * la clave anon JWT de {@link SupabaseConfig} y el token de sesión del
+     * usuario autenticado (fallback a la anon key cuando no hay sesión).</p>
+     */
     private static final String SUPABASE_ANON_KEY = "sb_publishable_kRepyqvM-2_pF4xeEHhVgg_7GA_lDuB";
 
     private static final OkHttpClient client = new OkHttpClient();
@@ -53,5 +72,14 @@ public class SupabaseClient {
 
     public static OkHttpClient getClient() {
         return client;
+    }
+
+    // Getters para el módulo de autenticación (AuthRepository / SupabaseConfig)
+    public static String getSupabaseUrl() {
+        return SUPABASE_URL;
+    }
+
+    public static String getAnonKey() {
+        return SUPABASE_ANON_KEY;
     }
 }
