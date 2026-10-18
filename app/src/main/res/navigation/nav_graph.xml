@@ -67,5 +67,20 @@
             android:name="lote_id"
             android:defaultValue=""
             app:argType="string" />
+
+        <argument
+            android:name="lote_nombre"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <argument
+            android:name="lote_cultivo"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <argument
+            android:name="lote_hectareas"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
 </navigation>
