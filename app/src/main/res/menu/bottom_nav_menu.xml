@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_nav_inicio"
+        android:title="@string/nav_inicio" />
+    <item
+        android:id="@+id/lotesFragment"
+        android:icon="@drawable/ic_nav_lotes"
+        android:title="@string/nav_lotes" />
+    <item
+        android:id="@+id/finanzasFragment"
+        android:icon="@drawable/ic_nav_finanzas"
+        android:title="@string/nav_finanzas" />
+    <item
+        android:id="@+id/asesorFragment"
+        android:icon="@drawable/ic_nav_asesor"
+        android:title="@string/nav_asesor" />
+</menu>

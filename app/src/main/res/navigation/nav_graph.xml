@@ -1,28 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Grafo plano de 5 destinos. PROPIEDAD EXCLUSIVA DEL INTEGRANTE 5.
+    Los integrantes 2, 3 y 4 NO editan este archivo: solicitan acciones o
+    argumentos por escrito al Integrante 5 (contratos congelados por el Arquitecto).
+-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.agentes.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/homeFragment"
+        android:name="com.example.agentes.ui.home.HomeFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/lotesFragment"
+        android:name="com.example.agentes.ui.lotes.LotesFragment"
+        android:label="@string/lotes_title"
+        tools:layout="@layout/fragment_lotes">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_lotesFragment_to_loteDetalleFragment"
+            app:destination="@id/loteDetalleFragment" />
+
+        <argument
+            android:name="abrir_formulario"
+            android:defaultValue="false"
+            app:argType="boolean" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.agentes.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+    <fragment
+        android:id="@+id/finanzasFragment"
+        android:name="com.example.agentes.ui.finanzas.FinanzasFragment"
+        android:label="@string/fin_title"
+        tools:layout="@layout/fragment_finanzas" />
+
+    <fragment
+        android:id="@+id/asesorFragment"
+        android:name="com.example.agentes.ui.asesor.AsesorFragment"
+        android:label="@string/ia_title"
+        tools:layout="@layout/fragment_asesor" />
+
+    <fragment
+        android:id="@+id/loteDetalleFragment"
+        android:name="com.example.agentes.ui.lotes.LoteDetalleFragment"
+        android:label="@string/detalle_title"
+        tools:layout="@layout/fragment_lote_detalle">
+
+        <argument
+            android:name="lote_id"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
 </navigation>
