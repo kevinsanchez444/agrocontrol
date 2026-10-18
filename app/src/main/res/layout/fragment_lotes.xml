@@ -7,19 +7,21 @@
     tools:context=".ui.lotes.LotesFragment">
 
     <!-- Contenido real: aquí vive el módulo del Integrante 2 -->
-    <ScrollView
+    <FrameLayout
         android:id="@+id/state_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         android:visibility="gone">
 
-        <LinearLayout
-            android:id="@+id/content_container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_lotes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="12dp"
+            tools:listitem="@layout/item_lote" />
+    </FrameLayout>
 
     <!-- Estado vacío (estado inicial del stub) -->
     <LinearLayout
@@ -114,6 +116,7 @@
             android:textColor="@color/agro_error" />
 
         <Button
+            android:id="@+id/btn_lotes_reintentar"
             style="@style/Widget.Agro.Button.Secondary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
