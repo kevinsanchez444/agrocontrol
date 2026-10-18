@@ -29,10 +29,15 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonFirst.setOnClickListener(v ->
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment)
-        );
+        binding.buttonFirst.setOnClickListener(v -> {
+            // Demo: abre el detalle financiero de un lote de ejemplo.
+            // El Integrante 2 reemplazará esto con el lote realmente seleccionado.
+            Bundle args = new Bundle();
+            args.putString("loteId", "demo-lote-la-albania");
+            args.putString("loteNombre", "Lote La Albania");
+            NavHostFragment.findNavController(FirstFragment.this)
+                    .navigate(R.id.action_FirstFragment_to_FinanzasFragment, args);
+        });
     }
 
     @Override

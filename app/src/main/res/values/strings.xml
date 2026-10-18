@@ -43,4 +43,26 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <!-- Finanzas (Integrante 3) -->
+    <string name="finanzas_titulo">Finanzas</string>
+    <string name="finanzas_saldo">Saldo del lote</string>
+    <string name="finanzas_ingresos_fmt">Ingresos: %1$s</string>
+    <string name="finanzas_gastos_fmt">Gastos: %1$s</string>
+    <string name="finanzas_historial">Historial</string>
+    <string name="finanzas_vacio">Sin movimientos todavía.\nRegistra tu primer gasto o ingreso.</string>
+    <string name="finanzas_registrar">Registrar movimiento</string>
+    <string name="finanzas_gasto">Gasto</string>
+    <string name="finanzas_ingreso">Ingreso</string>
+    <string name="finanzas_categoria">Categoría</string>
+    <string name="finanzas_monto">Monto</string>
+    <string name="finanzas_fecha">Fecha</string>
+    <string name="finanzas_descripcion">Descripción (opcional)</string>
+    <string name="finanzas_guardar">Guardar</string>
+    <string name="finanzas_cancelar">Cancelar</string>
+    <string name="finanzas_guardado">Movimiento registrado</string>
+    <string name="finanzas_error_categoria">Selecciona una categoría</string>
+    <string name="finanzas_error_monto">Ingresa un monto mayor que 0</string>
+    <string name="ir_a_finanzas">Ver finanzas del lote (demo)</string>
+    <string name="inicio_temporal">Pantalla temporal. Será reemplazada por la lista de lotes (Integrante 2) y la navegación (Integrante 5); desde cada lote se abrirá Finanzas con loteId y loteNombre.</string>
 </resources>

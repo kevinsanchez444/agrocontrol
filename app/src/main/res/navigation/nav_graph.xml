@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_FinanzasFragment"
+            app:destination="@id/FinanzasFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -24,5 +27,20 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/FinanzasFragment"
+        android:name="com.example.agentes.finanzas.FinanzasFragment"
+        android:label="@string/finanzas_titulo"
+        tools:layout="@layout/fragment_finanzas">
+
+        <argument
+            android:name="loteId"
+            android:defaultValue="demo-lote-la-albania"
+            app:argType="string" />
+        <argument
+            android:name="loteNombre"
+            android:defaultValue="Lote La Albania"
+            app:argType="string" />
     </fragment>
 </navigation>

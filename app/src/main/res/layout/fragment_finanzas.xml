@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".finanzas.FinanzasFragment">
+
+    <TextView
+        android:id="@+id/txt_lote_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        tools:text="Lote La Albania" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:cardBackgroundColor="@color/agro_verde_claro"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finanzas_saldo"
+                android:textColor="@color/agro_texto_oscuro"
+                android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+            <TextView
+                android:id="@+id/txt_saldo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:text="-$300.000 COP" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_ingresos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/agro_texto_oscuro"
+                    tools:text="Ingresos: $0 COP" />
+
+                <TextView
+                    android:id="@+id/txt_gastos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/agro_texto_oscuro"
+                    tools:text="Gastos: $300.000 COP" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/finanzas_historial"
+        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_movimientos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/txt_vacio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="@string/finanzas_vacio"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_registrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/finanzas_registrar" />
+</LinearLayout>

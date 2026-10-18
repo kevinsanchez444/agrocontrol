@@ -36,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+        // El libro de caja tiene su propio botón "Registrar movimiento": se oculta el FAB de plantilla.
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.FinanzasFragment) {
+                binding.fab.hide();
+            } else {
+                binding.fab.show();
+            }
+        });
+
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

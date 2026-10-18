@@ -1,0 +1,6 @@
+<resources>
+    <color name="agro_ingreso">#81C784</color>
+    <color name="agro_gasto">#EF9A9A</color>
+    <color name="agro_verde_claro">#27402A</color>
+    <color name="agro_texto_oscuro">#E6EFE3</color>
+</resources>

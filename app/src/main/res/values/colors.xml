@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="agro_ingreso">#2E7D32</color>
+    <color name="agro_gasto">#C62828</color>
+    <color name="agro_verde_claro">#E3F1E2</color>
+    <color name="agro_texto_oscuro">#1D2A1C</color>
 </resources>
