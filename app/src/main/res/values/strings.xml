@@ -40,6 +40,7 @@
     <string name="registro_error_confirmacion">Supabase intentó enviar un correo de confirmación y no pudo. El administrador debe desactivar \"Confirm email\" en Authentication → Sign In / Providers → Email.</string>
     <string name="registro_error_correo_rechazado">Supabase rechazó ese correo. Revisa que esté bien escrito o usa otro.</string>
     <string name="registro_error_captcha">El registro tiene CAPTCHA activado en Supabase y la app no lo soporta. El administrador debe desactivarlo (Authentication → Attack Protection).</string>
+    <string name="registro_exitoso">Usuario registrado. Ahora inicia sesión con tu nombre y correo.</string>
     <string name="registro_error_servidor">No fue posible crear la cuenta. Inténtalo más tarde.</string>
 
     <string name="lorem_ipsum">

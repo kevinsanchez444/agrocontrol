@@ -13,6 +13,7 @@ import com.example.agentes.R;
 import com.example.agentes.data.AuthRepository;
 import com.example.agentes.data.SupabaseConfig;
 import com.example.agentes.databinding.FragmentLoginBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * Pantalla de inicio de sesión de AgroControl.
@@ -25,9 +26,6 @@ import com.example.agentes.databinding.FragmentLoginBinding;
 public class LoginFragment extends Fragment {
 
     private static final String RESULTADO_REGISTRO = "registro_exitoso";
-    private static final String ARG_USUARIO_ID = "usuario_id";
-    private static final String ARG_NOMBRE = "nombre";
-    private static final String ARG_CORREO = "email";
 
     private FragmentLoginBinding binding;
     private AuthRepository repositorio;
@@ -59,16 +57,16 @@ public class LoginFragment extends Fragment {
         binding.textoRegistrarse.setOnClickListener(v ->
                 new RegistrarseFragment().show(getParentFragmentManager(), "registro"));
 
-        // Tras registrarse en el bottom sheet se entra directamente a la app.
+        // Tras registrarse NO se entra a la app: se avisa "Usuario registrado"
+        // y el usuario debe escribir su nombre y correo para iniciar sesión.
         getParentFragmentManager().setFragmentResultListener(
                 RESULTADO_REGISTRO, getViewLifecycleOwner(), (clave, datos) -> {
-                    SupabaseConfig.setSesion("", "",
-                            datos.getString(ARG_USUARIO_ID, ""),
-                            datos.getString(ARG_NOMBRE, ""),
-                            datos.getString(ARG_CORREO, ""));
-                    SupabaseConfig.guardarSesion(requireContext(),
-                            binding.checkboxRecordarme.isChecked());
-                    navegarAApp();
+                    limpiarErrores();
+                    binding.campoNombre.getEditText().setText("");
+                    binding.campoCorreo.getEditText().setText("");
+                    binding.campoNombre.requestFocus();
+                    Snackbar.make(binding.getRoot(), R.string.registro_exitoso,
+                            Snackbar.LENGTH_LONG).show();
                 });
     }
 
