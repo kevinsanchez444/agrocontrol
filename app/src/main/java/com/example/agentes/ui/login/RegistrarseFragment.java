@@ -95,6 +95,12 @@ public class RegistrarseFragment extends BottomSheetDialogFragment {
         if (tipoError == AuthRepository.ERROR_YA_REGISTRADO) {
             return getString(R.string.registro_error_ya_registrado);
         }
+        if (tipoError == AuthRepository.ERROR_REGISTRO_DESHABILITADO) {
+            return getString(R.string.registro_error_deshabilitado);
+        }
+        if (tipoError == AuthRepository.ERROR_LIMITE_INTENTOS) {
+            return getString(R.string.registro_error_rate);
+        }
         if (tipoError == AuthRepository.ERROR_PERMISOS) {
             return getString(R.string.login_error_permisos);
         }

@@ -33,6 +33,8 @@
     <string name="registro_cancelar">Cancelar</string>
     <string name="registro_en_curso">Creando cuenta…</string>
     <string name="registro_error_ya_registrado">Ese correo ya está registrado. Inicia sesión con tu nombre.</string>
+    <string name="registro_error_deshabilitado">El registro está deshabilitado en Supabase. Pide al administrador que active el proveedor de Email (Authentication → Providers).</string>
+    <string name="registro_error_rate">Demasiados intentos de registro. Espera unos minutos y vuelve a intentarlo.</string>
     <string name="registro_error_red">No se pudo crear la cuenta. Revisa tu conexión e inténtalo de nuevo.</string>
     <string name="registro_error_servidor">No fue posible crear la cuenta. Inténtalo más tarde.</string>
 
