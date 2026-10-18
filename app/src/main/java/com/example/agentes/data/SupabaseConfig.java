@@ -30,6 +30,16 @@ public final class SupabaseConfig {
      * {@code service_role key}.</p>
      */
     public static final String SUPABASE_URL = "https://pyhvhbenqgmgztbkmrgh.supabase.co";
+    /**
+     * Clave <b>anon</b> en formato JWT legacy ({@code eyJ...}) del mismo proyecto.
+     * La usa <b>solo el módulo de lotes</b> ({@code LoteRepository}): viaja en el
+     * header {@code apikey} y, cuando hay sesión de usuario, el token del usuario
+     * viaja en {@code Authorization: Bearer} (ver {@link #getAccessToken()}).
+     * Los flujos de autenticación (login/registro) NO usan esta clave: van con la
+     * clave publicable {@code sb_publishable_...} de {@code SupabaseClient}, que
+     * no debe enviarse como Bearer. Ambas claves apuntan al mismo proyecto, cuya
+     * URL se declara una sola vez en {@link #SUPABASE_URL}.
+     */
     public static final String SUPABASE_ANON_KEY =
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5aHZoYmV"
             + "ucWdtZ3p0YmttcmdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxODkyODAsImV4cCI6MjEwNz"

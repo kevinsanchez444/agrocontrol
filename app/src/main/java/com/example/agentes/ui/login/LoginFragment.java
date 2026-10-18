@@ -104,6 +104,10 @@ public class LoginFragment extends Fragment {
                     binding.campoNombre.requestFocus();
                     return;
                 }
+                // El login del MVP (nombre + correo contra public.usuarios) no emite
+                // JWT: el token va vacío y LoteRepository usará la clave anon como
+                // Authorization. Lo que identifica al usuario en el módulo de lotes
+                // es este usuarioId (crearLote lo envía y listarLotes filtra por él).
                 SupabaseConfig.setSesion("", "", usuarioId, nombre.trim(),
                         correo.trim().toLowerCase(java.util.Locale.ROOT));
                 SupabaseConfig.guardarSesion(requireContext(),

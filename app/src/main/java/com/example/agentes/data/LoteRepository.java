@@ -71,7 +71,13 @@ public class LoteRepository {
             public void run() {
                 HttpURLConnection conexion = null;
                 try {
-                    String ruta = TABLA + "?select=" + COLUMNAS + "&order=" + ORDEN;
+                    // Filtro explícito por el usuario de la sesión: no depende solo de
+                    // RLS, que con la clave anon no distingue usuarios. Así la lista
+                    // coincide siempre con el usuario que inició sesión.
+                    String usuarioId = SupabaseConfig.getUsuarioId();
+                    String ruta = TABLA + "?select=" + COLUMNAS
+                            + (TextUtils.isEmpty(usuarioId) ? "" : "&usuario_id=eq." + usuarioId)
+                            + "&order=" + ORDEN;
                     conexion = abrirConexion("GET", ruta);
                     int codigo = conexion.getResponseCode();
                     String cuerpo = leerRespuesta(codigo < 400 ? conexion.getInputStream() : conexion.getErrorStream());
@@ -151,6 +157,10 @@ public class LoteRepository {
         URL url = new URL(SupabaseConfig.getRestUrl() + "/" + ruta);
         HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
         conexion.setRequestMethod(metodo);
+        // apikey: la clave anon del proyecto (rol anon/invitado).
+        // Authorization: el token del usuario autenticado si existe
+        // (SupabaseConfig.getAccessToken() lo devuelve); sin sesión, la misma
+        // clave anon como fallback para no perder la funcionalidad de consulta.
         conexion.setRequestProperty("apikey", SupabaseConfig.SUPABASE_ANON_KEY);
         conexion.setRequestProperty("Authorization", "Bearer " + SupabaseConfig.getAccessToken());
         conexion.setRequestProperty("Content-Type", "application/json");
