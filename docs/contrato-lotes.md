@@ -99,23 +99,30 @@ findNavController().navigate(R.id.accionLotesADetalleLote, argumentos);
 ```
 lotes(
   id          uuid primary key default gen_random_uuid(),
-  usuario_id  uuid not null references usuarios(id),  -- o perfiles(id)
-  nombre      text not null,
-  cultivo     text not null,      -- 'Café' | 'Plátano' | 'Aguacate'
-  hectareas   numeric(8,2) not null check (hectareas > 0),
-  creado_en   timestamptz not null default now()
+  usuario_id  uuid not null default auth.uid() references usuarios(id),
+  nombre      text not null,       -- 1..120 caracteres
+  cultivo     text not null,       -- 'Café' | 'Plátano' | 'Aguacate'
+  hectareas   numeric not null check (hectareas > 0),
+  activo      boolean not null default true,   -- baja lógica (el listado aún no la filtra)
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
 )
 ```
 
-- Las consultas ordenan por `creado_en.desc`.
+- **Nombre de la columna de fecha: `created_at`** (no `creado_en`, como decía el README §5).
+  PostgREST responde `42703 column lotes.creado_en does not exist` si se ordena por el nombre
+  viejo, por lo que `LoteRepository.ORDEN` usa `created_at.desc`, que además aprovecha el índice
+  `idx_lotes_usuario_created (usuario_id, created_at DESC)`.
+- La BD existe con `uq_lotes_usuario_nombre_ci`: el nombre de un lote es único por usuario
+  (sin distinguir mayúsculas), así que repetir nombre devuelve `409`.
 - Las políticas RLS deben permitir al usuario autenticado leer/insertar solo sus propios lotes
-  (`usuario_id = auth.uid()`).
-- Cuando el Integrante 1 tenga los valores reales, debe reemplazar los marcadores de
-  `SupabaseConfig.SUPABASE_URL` y `SupabaseConfig.SUPABASE_ANON_KEY`, y llamar a
-  `SupabaseConfig.setSesion(token, usuarioId)` tras el login (y `limpiarSesion()` al salir).
-  **Nunca** se versiona la `service_role key`.
+  (`usuario_id = auth.uid()`). **`anon` no tiene GRANT sobre las tablas**: sin JWT, la API
+  responde `401`, así que la sesión es obligatoria.
+- `SupabaseConfig.SUPABASE_URL` y `SupabaseConfig.SUPABASE_ANON_KEY` ya llevan los valores reales
+  del proyecto; sigue faltando llamar a `SupabaseConfig.setSesion(token, usuarioId)` tras el
+  login (y `limpiarSesion()` al salir). **Nunca** se versiona la `service_role key`.
 
-> Mientras los valores sigan siendo marcadores, el repositorio devuelve el mensaje
+> Mientras `SupabaseConfig` tenga marcadores, el repositorio devuelve el mensaje
 > "Falta configurar la conexión con Supabase." en lugar de intentar la petición.
 
 ## Criterios de aceptación (del plan)

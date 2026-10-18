@@ -15,9 +15,19 @@ import android.text.TextUtils;
  */
 public final class SupabaseConfig {
 
-    // TODO(Integrante 1): reemplazar por los valores reales del proyecto de Supabase.
-    public static final String SUPABASE_URL = "https://TU-PROYECTO.supabase.co";
-    public static final String SUPABASE_ANON_KEY = "TU_ANON_KEY";
+    /**
+     * URL del proyecto de Supabase.
+     *
+     * <p>Son credenciales <b>públicas</b> del cliente (viajan en el APK y ya son visibles para
+     * quien descargue la app); protegen los datos las políticas RLS y el JWT, nunca esta clave.
+     * Por eso está permitido escribirlas aquí, y por eso <b>nunca</b> debe colocarse la
+     * {@code service_role key}.</p>
+     */
+    public static final String SUPABASE_URL = "https://pyhvhbenqgmgztbkmrgh.supabase.co";
+    public static final String SUPABASE_ANON_KEY =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5aHZoYmV"
+            + "ucWdtZ3p0YmttcmdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxODkyODAsImV4cCI6MjEwNz"
+            + "c2NTI4MH0.-yGK2sFegp5bNwZ71BaSJdWcYigjHG82bV2eEedd1iA";
 
     private static volatile String accessToken;
     private static volatile String usuarioId;

@@ -28,8 +28,10 @@ import java.util.concurrent.Executors;
  * Acceso a la tabla {@code lotes} de Supabase mediante la API REST (PostgREST).
  *
  * <p><b>Contrato de la tabla</b> (la administra el Integrante 1):
- * {@code lotes(id uuid pk, usuario_id uuid fk -> usuarios/perfiles, nombre text,
- * cultivo text, hectareas numeric, creado_en timestamptz)}.</p>
+ * {@code lotes(id uuid pk, usuario_id uuid default auth.uid() fk -> usuarios, nombre text,
+ * cultivo text, hectareas numeric, activo boolean, created_at timestamptz,
+ * updated_at timestamptz)}. El orden usa {@code created_at.desc}, que es el nombre real de la
+ * columna en Supabase; no existe ninguna columna llamada {@code creado_en}.</p>
  *
  * <p>Las peticiones se ejecutan en un hilo de fondo y el resultado se entrega en el hilo
  * principal, para que los Fragment actualicen la interfaz sin manejar hilos a mano.</p>
@@ -46,7 +48,7 @@ public class LoteRepository {
     private static final String TAG = "LoteRepository";
     private static final String TABLA = "lotes";
     private static final String COLUMNAS = "id,usuario_id,nombre,cultivo,hectareas";
-    private static final String ORDEN = "creado_en.desc";
+    private static final String ORDEN = "created_at.desc";
 
     private static final String MSG_SIN_CONFIGURAR =
             "Falta configurar la conexión con Supabase.";
