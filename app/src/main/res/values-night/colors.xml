@@ -11,4 +11,10 @@
     <color name="agro_error">#EF6C6C</color>
     <!-- Desviacion documentada del prototipo: blanco sobre #66BB6A no alcanza contraste WCAG AA -->
     <color name="agro_on_primary">#050805</color>
+
+    <!-- Módulo Finanzas (feature/finanzas): colores del libro de caja -->
+    <color name="agro_ingreso">#81C784</color>
+    <color name="agro_gasto">#EF9A9A</color>
+    <color name="agro_verde_claro">#27402A</color>
+    <color name="agro_texto_oscuro">#E6EFE3</color>
 </resources>

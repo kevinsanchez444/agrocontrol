@@ -6,36 +6,44 @@
     android:padding="@dimen/agro_screen_padding"
     tools:context=".ui.asesor.AsesorFragment">
 
-    <!-- Contenido real: aquí vive el chat del Integrante 4 -->
+    <!-- Contenido real: el chat del Asesor IA vive DIRECTAMENTE en esta pestaña -->
     <LinearLayout
         android:id="@+id/state_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone" />
+        android:visibility="gone">
 
-    <!-- Chat vacío: burbuja de bienvenida + input (deshabilitado hasta conectar la IA) -->
-    <LinearLayout
-        android:id="@+id/state_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:visibility="visible">
+        <!-- Placeholder de sugerencias: visible SOLO mientras el chat está vacío -->
+        <TextView
+            android:id="@+id/text_asesor_placeholder"
+            style="@style/Widget.Agro.Bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="@dimen/agro_gap_small"
+            android:text="@string/ia_placeholder" />
 
-        <ScrollView
+        <!-- Limpiar conversación: visible SOLO cuando ya hay mensajes -->
+        <Button
+            android:id="@+id/btn_asesor_limpiar"
+            style="@style/Widget.Agro.Button.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/agro_gap_small"
+            android:visibility="gone"
+            android:text="@string/ia_limpiar" />
+
+        <!-- Conversación: burbujas del usuario y de la IA -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_mensajes"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            tools:listitem="@layout/item_message_ia" />
 
-            <TextView
-                style="@style/Widget.Agro.Bubble"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginBottom="@dimen/agro_gap_small"
-                android:text="@string/ia_welcome" />
-        </ScrollView>
-
+        <!-- Fila de entrada: habilitada siempre que la pestaña está visible -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,8 +55,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:enabled="false"
-                android:hint="@string/ia_input_hint" />
+                android:hint="@string/ia_input_hint"
+                android:imeOptions="actionSend"
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/btn_asesor_send"
@@ -57,11 +66,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="6dp"
-                android:enabled="false"
                 android:minWidth="48dp"
                 android:text="@string/ia_send" />
         </LinearLayout>
     </LinearLayout>
+
+    <!-- Estado vacío: reservado para el helper EstadoViews (sin ids propios) -->
+    <LinearLayout
+        android:id="@+id/state_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" />
 
     <!-- Estado de carga -->
     <LinearLayout

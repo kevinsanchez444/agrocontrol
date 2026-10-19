@@ -12,4 +12,15 @@
     <color name="agro_outline">#D5DFD1</color>
     <color name="agro_error">#C62828</color>
     <color name="agro_on_primary">#FFFFFF</color>
+
+    <!-- Módulo Asesor IA: error del chat. Los colores iOS de las burbujas
+         (colorUsuario/colorIA/colorFondo y afines) se eliminaron al
+         integrar la paleta Agro en los layouts del chat. -->
+    <color name="colorError">#B00020</color>
+
+    <!-- Módulo Finanzas (feature/finanzas): colores del libro de caja -->
+    <color name="agro_ingreso">#2E7D32</color>
+    <color name="agro_gasto">#C62828</color>
+    <color name="agro_verde_claro">#E3F1E2</color>
+    <color name="agro_texto_oscuro">#1D2A1C</color>
 </resources>

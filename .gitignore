@@ -20,3 +20,6 @@ local.properties
 
 # Secretos locales (nunca versionar; solo .env.example)
 .env
+
+# Temporales de la CLI de Supabase (se regeneran solos)
+supabase/.temp/

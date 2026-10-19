@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/finanzasFragment"
-        android:name="com.example.agentes.ui.finanzas.FinanzasFragment"
+        android:name="com.example.agentes.finanzas.FinanzasFragment"
         android:label="@string/fin_title"
         tools:layout="@layout/fragment_finanzas" />
 
