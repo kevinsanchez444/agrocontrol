@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/agro_bg"
+    android:fillViewport="true"
+    tools:context=".ui.login.LoginFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/agro_screen_padding"
+        android:paddingBottom="24dp">
+
+        <!-- Marca -->
+        <ImageView
+            android:id="@+id/imagen_logo"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/login_titulo"
+            android:src="@drawable/ic_agro_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/texto_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/agro_card_gap"
+            android:text="@string/login_titulo"
+            android:textAppearance="@style/TextAgro.BigNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imagen_logo" />
+
+        <TextView
+            android:id="@+id/texto_subtitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/login_subtitulo"
+            android:textAppearance="@style/TextAgro.Muted"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/texto_titulo" />
+
+        <!-- Credenciales: nombre + correo (la tabla usuarios no tiene contraseñas) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/campo_nombre"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/agro_gap_small"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/agro_gap_small"
+            android:hint="@string/login_campo_nombre"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/texto_subtitulo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName|textCapWords"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/campo_correo"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/agro_gap_small"
+            android:layout_marginTop="@dimen/agro_card_gap"
+            android:layout_marginEnd="@dimen/agro_gap_small"
+            android:hint="@string/login_campo_correo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/campo_nombre">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Recordarme -->
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkbox_recordarme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/agro_gap_small"
+            android:checked="true"
+            android:text="@string/login_recordarme"
+            android:textColor="@color/agro_on_surface"
+            app:layout_constraintStart_toStartOf="@id/campo_correo"
+            app:layout_constraintTop_toBottomOf="@id/campo_correo" />
+
+        <!-- Enlace a registro -->
+        <LinearLayout
+            android:id="@+id/fila_registro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/agro_gap_small"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/campo_correo"
+            app:layout_constraintStart_toStartOf="@id/campo_correo"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_recordarme">
+
+            <TextView
+                android:id="@+id/texto_no_registrado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_no_registrado"
+                android:textAppearance="@style/TextAgro.Muted"
+                android:textColor="@color/agro_on_surface" />
+
+            <TextView
+                android:id="@+id/texto_registrarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/login_registrate"
+                android:textAppearance="@style/TextAgro.Muted"
+                android:textColor="@color/agro_primary"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Acción principal -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/boton_iniciar_sesion"
+            style="@style/Widget.Agro.Button.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/agro_card_gap"
+            android:text="@string/login_boton"
+            app:layout_constraintEnd_toEndOf="@id/campo_correo"
+            app:layout_constraintStart_toStartOf="@id/campo_correo"
+            app:layout_constraintTop_toBottomOf="@id/fila_registro" />
+
+        <!-- Estados de carga y error -->
+        <ProgressBar
+            android:id="@+id/progress_carga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/agro_card_gap"
+            android:indeterminateTint="@color/agro_primary"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/boton_iniciar_sesion" />
+
+        <TextView
+            android:id="@+id/texto_error"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/agro_gap_small"
+            android:gravity="center"
+            android:textAppearance="@style/TextAgro.Muted"
+            android:textColor="@color/agro_error"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/campo_correo"
+            app:layout_constraintStart_toStartOf="@id/campo_correo"
+            app:layout_constraintTop_toBottomOf="@id/progress_carga"
+            tools:text="No estás registrado. Crea tu cuenta con el enlace Regístrate."
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Paleta AgroControl (noche). Los colores resuelven desde values-night/colors.xml. -->
+    <style name="Base.Theme.Agentes" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Paleta AgroControl (modo noche) -->
+        <item name="colorPrimary">@color/agro_primary</item>
+        <item name="colorOnPrimary">@color/agro_on_primary</item>
+        <item name="colorPrimaryContainer">@color/agro_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/agro_primary</item>
+        <item name="colorSurface">@color/agro_surface</item>
+        <item name="colorOnSurface">@color/agro_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/agro_muted</item>
+        <item name="colorOutline">@color/agro_outline</item>
+        <item name="colorError">@color/agro_error</item>
+        <item name="android:colorBackground">@color/agro_bg</item>
+        <item name="android:windowBackground">@color/agro_bg</item>
+    </style>
+</resources>

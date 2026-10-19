@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/agro_screen_padding"
+    tools:context=".ui.asesor.AsesorFragment">
+
+    <!-- Contenido real: el chat del Asesor IA vive DIRECTAMENTE en esta pestaña -->
+    <LinearLayout
+        android:id="@+id/state_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!-- Placeholder de sugerencias: visible SOLO mientras el chat está vacío -->
+        <TextView
+            android:id="@+id/text_asesor_placeholder"
+            style="@style/Widget.Agro.Bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="@dimen/agro_gap_small"
+            android:text="@string/ia_placeholder" />
+
+        <!-- Limpiar conversación: visible SOLO cuando ya hay mensajes -->
+        <Button
+            android:id="@+id/btn_asesor_limpiar"
+            style="@style/Widget.Agro.Button.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/agro_gap_small"
+            android:visibility="gone"
+            android:text="@string/ia_limpiar" />
+
+        <!-- Conversación: burbujas del usuario y de la IA -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_mensajes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:listitem="@layout/item_message_ia" />
+
+        <!-- Fila de entrada: habilitada siempre que la pestaña está visible -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_asesor"
+                style="@style/Widget.Agro.Input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/ia_input_hint"
+                android:imeOptions="actionSend"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btn_asesor_send"
+                style="@style/Widget.Agro.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
+                android:minWidth="48dp"
+                android:text="@string/ia_send" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Estado vacío: reservado para el helper EstadoViews (sin ids propios) -->
+    <LinearLayout
+        android:id="@+id/state_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+    <!-- Estado de carga -->
+    <LinearLayout
+        android:id="@+id/state_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/TextAgro.Muted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/state_loading" />
+    </LinearLayout>
+
+    <!-- Estado de error -->
+    <LinearLayout
+        android:id="@+id/state_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/state_emoji_error"
+            android:textSize="28sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/state_error_generic"
+            android:textColor="@color/agro_error" />
+
+        <Button
+            style="@style/Widget.Agro.Button.Secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/state_retry" />
+    </LinearLayout>
+</FrameLayout>
