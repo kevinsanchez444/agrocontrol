@@ -55,7 +55,9 @@ public class FinanzasFragment extends Fragment {
         Bundle args = getArguments();
         loteId = args != null ? args.getString(ARG_LOTE_ID, "") : "";
         String nombre = args != null ? args.getString(ARG_LOTE_NOMBRE, "") : "";
-        binding.txtLoteNombre.setText(nombre);
+        // Integración: el destino finanzasFragment (bottom nav / Home) no envía argumentos;
+        // en ese caso se muestra el título del destino como encabezado.
+        binding.txtLoteNombre.setText(nombre.isEmpty() ? getString(R.string.fin_title) : nombre);
 
         // Para conectar Supabase: reemplazar esta línea por la implementación remota.
         repositorio = new LocalMovimientoRepository(requireContext());
