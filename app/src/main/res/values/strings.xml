@@ -160,13 +160,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <!-- Módulo Asesor IA (feature/asesor-ia): pantalla ChatActivity -->
-    <string name="title_chat">Asesor IA Agrícola</string>
-    <string name="hint_mensaje">Escribe tu consulta sobre café, plátano o aguacate</string>
-    <string name="btn_enviar">Enviar</string>
-    <string name="btn_reintentar">Reintentar</string>
-    <string name="error_red">Error de red o servicio no disponible</string>
-
     <!-- Finanzas (Integrante 3) -->
     <string name="finanzas_titulo">Finanzas</string>
     <string name="finanzas_saldo">Saldo del lote</string>

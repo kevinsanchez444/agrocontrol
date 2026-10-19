@@ -23,10 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Módulo Asesor IA (feature/asesor-ia): chat con la IA (interno, sin launcher propio) -->
-        <activity
-            android:name="com.agrocontrol.app.asesor.ui.ChatActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
