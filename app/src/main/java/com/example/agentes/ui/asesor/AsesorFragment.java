@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.agrocontrol.app.asesor.ChatViewModel;
 import com.agrocontrol.app.asesor.ui.ChatAdapter;
+import com.example.agentes.R;
 import com.example.agentes.databinding.FragmentAsesorBinding;
 import com.example.agentes.ui.EstadoViews;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Pestaña "Asesor": el chat con el Asesor IA vive DIRECTAMENTE aquí
@@ -49,7 +51,11 @@ public class AsesorFragment extends Fragment {
                 binding.stateEmpty, binding.stateLoading, binding.stateError, binding.stateContent);
         estados.mostrar(EstadoViews.CONTENIDO);
 
-        viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
+        // Ámbito de ACTIVIDAD (no `this`): la conversación es del usuario, no de
+        // la vista del fragment. `new ViewModelProvider(this)` la ataba al
+        // fragment y se perdía al cambiar de pestaña; con la Activity sobrevive
+        // a la recreación de la vista y a la navegación entre pestañas.
+        viewModel = new ViewModelProvider(requireActivity()).get(ChatViewModel.class);
 
         // Historial de la conversación en el RecyclerView del propio fragment
         ChatAdapter adapter = new ChatAdapter();
@@ -60,9 +66,11 @@ public class AsesorFragment extends Fragment {
             if (binding == null) {
                 return;
             }
+            boolean vacio = mensajes.isEmpty();
             // Placeholder de sugerencias: solo mientras no hay mensajes en el chat
-            binding.textAsesorPlaceholder.setVisibility(
-                    mensajes.isEmpty() ? View.VISIBLE : View.GONE);
+            binding.textAsesorPlaceholder.setVisibility(vacio ? View.VISIBLE : View.GONE);
+            // El botón "Limpiar" solo tiene sentido cuando hay conversación
+            binding.btnAsesorLimpiar.setVisibility(vacio ? View.GONE : View.VISIBLE);
             // submitList aplica DiffUtil en background: el scroll se hace al confirmar
             adapter.submitList(mensajes, () -> {
                 if (binding != null && !mensajes.isEmpty()) {
@@ -80,6 +88,9 @@ public class AsesorFragment extends Fragment {
 
         binding.btnAsesorSend.setOnClickListener(v -> enviarMensaje());
 
+        // Borra la conversación (memoria + Supabase) tras confirmar
+        binding.btnAsesorLimpiar.setOnClickListener(v -> confirmarLimpiar());
+
         // Acción IME "send" del teclado virtual
         binding.inputAsesor.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEND) {
@@ -88,6 +99,17 @@ public class AsesorFragment extends Fragment {
             }
             return false;
         });
+    }
+
+    /** Diálogo de confirmación antes de borrar el historial del chat. */
+    private void confirmarLimpiar() {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.ia_limpiar_titulo)
+                .setMessage(R.string.ia_limpiar_mensaje)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.ia_limpiar_confirmar,
+                        (dialogo, which) -> viewModel.limpiarConversacion())
+                .show();
     }
 
     private void enviarMensaje() {

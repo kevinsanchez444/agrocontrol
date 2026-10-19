@@ -1,6 +1,6 @@
 # Plan: Asistente de IA real para AgroControl
 
-> Estado actual (oct 2026): el chat de la pestaña Asesor funciona con **`AsesorIAMock`** — respuestas predeterminadas por palabras clave (café/plátano/aguacate), sin llamadas a ningún servicio. La interfaz `AsesorIA` ya existe y está lista para enchufar una implementación real sin tocar la UI.
+> Estado actual (oct 2026): el chat de la pestaña Asesor funciona con el **asesor IA real** — la Edge Function `asesor-ia` (Supabase) llama a **Gemini** con la clave guardada como *secreto*, nunca en el APK. El **historial de la conversación se guarda en Supabase** (tabla `public.mensajes_chat`), de modo que sobrevive al cambio de pestaña y al reinicio de la app.
 
 ## 1. Arquitectura objetivo
 
@@ -93,3 +93,23 @@ través de una Edge Function; la clave del proveedor **no** está en el APK.
 3. **Rate limit por usuario** (p. ej. 20 consultas/día) como igualmente siguiente
    paso: hoy cualquiera con la anon key (pública) puede consumir la cuota.
 4. Fallback opcional al `AsesorIAMock` si el proveedor está caído.
+
+## 7. Persistencia del chat (oct 2026)
+
+Problema: `ChatViewModel` vivía solo en memoria y el fragment lo obtenía con
+`new ViewModelProvider(this)` (ámbito de fragment), así que la conversación se
+perdía al cambiar de pestaña o reiniciar la app. Ahora el historial se guarda en
+**Supabase**, igual que los lotes y los movimientos.
+
+| Pieza | Dónde | Qué hace |
+|---|---|---|
+| Tabla `public.mensajes_chat` | Supabase (`id`, `usuario_id`, `texto`, `de_usuario`, `created_at`) | Fuente de verdad del historial: guarda cada burbuja (usuario e IA) |
+| Script `supabase/mensajes_chat_permisos.sql` | `supabase/` | Crea la tabla, el índice y los permisos/RLS MVP. **Debe ejecutarse en Supabase → SQL Editor** (es idempotente; sin él la tabla no existe y el chat solo dura en memoria) |
+| `MensajesChatRepository` / `MensajesChatSupabase` | `app/src/main/java/com/agrocontrol/app/asesor/data/MensajesChatRepository.kt` | `cargar(50)`, `guardar(mensaje)` y `borrarTodo()` con `HttpURLConnection`; nunca lanza y sin sesión no toca la red |
+| `ChatViewModel` | `app/src/main/java/com/agrocontrol/app/asesor/ChatViewModel.kt` | Recarga el historial al arrancar, persiste cada mensaje (las burbujas de ERROR no) y expone `limpiarConversacion()` |
+
+Además, `AsesorFragment` obtiene el ViewModel con `new ViewModelProvider(requireActivity())`:
+el chat tiene **ámbito de actividad**, por lo que la conversación sobrevive al
+cambio de pestaña y a la recreación de la vista. La UI añade un botón
+**Limpiar** (visible solo cuando hay mensajes) que pide confirmación antes de
+borrar la conversación en memoria y en Supabase.

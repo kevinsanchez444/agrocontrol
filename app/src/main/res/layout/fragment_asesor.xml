@@ -24,6 +24,17 @@
             android:layout_marginBottom="@dimen/agro_gap_small"
             android:text="@string/ia_placeholder" />
 
+        <!-- Limpiar conversación: visible SOLO cuando ya hay mensajes -->
+        <Button
+            android:id="@+id/btn_asesor_limpiar"
+            style="@style/Widget.Agro.Button.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/agro_gap_small"
+            android:visibility="gone"
+            android:text="@string/ia_limpiar" />
+
         <!-- Conversación: burbujas del usuario y de la IA -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lista_mensajes"

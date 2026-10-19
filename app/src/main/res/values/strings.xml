@@ -57,6 +57,10 @@
     <string name="ia_placeholder">Pregúntame sobre:\n• Café, plátano y aguacate\n• Plagas, riego y fertilización\n• Recomendaciones para tus lotes</string>
     <string name="ia_input_hint">Escribe tu pregunta…</string>
     <string name="ia_send">➤</string>
+    <string name="ia_limpiar">Limpiar</string>
+    <string name="ia_limpiar_titulo">Borrar conversación</string>
+    <string name="ia_limpiar_mensaje">Se borrará el historial del chat de este usuario. Esta acción no se puede deshacer.</string>
+    <string name="ia_limpiar_confirmar">Borrar</string>
 
     <!-- Módulo de lotes (Integrante 2) - recursos requeridos por LotesAdapter/NuevoLoteFragment -->
     <string name="lote_hectareas_formato">%1$s ha</string>
