@@ -54,7 +54,7 @@
     <string name="fin_empty_emoji">💰</string>
 
     <!-- Módulo Asesor IA (stub provisorio, Integrante 4) -->
-    <string name="ia_welcome">Hola, soy tu asesor de café, plátano y aguacate. ¿En qué te ayudo?</string>
+    <string name="ia_placeholder">Soy tu asesor de AgroControl 🌱\n\nPregúntame sobre:\n• Café, plátano y aguacate\n• Plagas, riego y fertilización\n• Recomendaciones para tus lotes</string>
     <string name="ia_input_hint">Escribe tu pregunta…</string>
     <string name="ia_send">➤</string>
 

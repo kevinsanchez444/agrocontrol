@@ -14,14 +14,15 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <!-- Burbuja de bienvenida: encabezado fijo de la conversación -->
+        <!-- Placeholder de sugerencias: visible SOLO mientras el chat está vacío -->
         <TextView
+            android:id="@+id/text_asesor_placeholder"
             style="@style/Widget.Agro.Bubble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginBottom="@dimen/agro_gap_small"
-            android:text="@string/ia_welcome" />
+            android:text="@string/ia_placeholder" />
 
         <!-- Conversación: burbujas del usuario y de la IA -->
         <androidx.recyclerview.widget.RecyclerView

@@ -19,8 +19,9 @@ import com.example.agentes.ui.EstadoViews;
 
 /**
  * Pestaña "Asesor": el chat con el Asesor IA vive DIRECTAMENTE aquí
- * (bienvenida fija + historial en RecyclerView + fila de entrada), sin
- * Activitys intermedias. La lógica (envío, respuesta, errores y reintento)
+ * (placeholder de sugerencias mientras el chat está vacío + historial en
+ * RecyclerView + fila de entrada), sin Activitys intermedias. La lógica
+ * (envío, respuesta, errores y reintento)
  * está en {@link ChatViewModel}, y las burbujas en {@link ChatAdapter};
  * este fragment solo observa y conecta la UI.
  * Nunca se incluye una clave de API dentro de la app (el backend/mock
@@ -59,6 +60,9 @@ public class AsesorFragment extends Fragment {
             if (binding == null) {
                 return;
             }
+            // Placeholder de sugerencias: solo mientras no hay mensajes en el chat
+            binding.textAsesorPlaceholder.setVisibility(
+                    mensajes.isEmpty() ? View.VISIBLE : View.GONE);
             // submitList aplica DiffUtil en background: el scroll se hace al confirmar
             adapter.submitList(mensajes, () -> {
                 if (binding != null && !mensajes.isEmpty()) {
