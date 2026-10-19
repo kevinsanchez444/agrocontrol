@@ -5,10 +5,15 @@ import java.util.List;
 /**
  * Contrato de acceso a datos del libro de caja.
  *
- * Hoy lo implementa {@link LocalMovimientoRepository} (almacenamiento en el dispositivo).
- * Cuando la conexión con Supabase (Integrante 1) esté lista, basta con crear una
- * implementación que llame a la tabla {@code movimientos} y cambiarla en
- * {@code FinanzasFragment}; la pantalla no necesita más cambios.
+ * <p><b>Implementación activa:</b> {@link SupabaseMovimientoRepository}, que habla con la tabla
+ * {@code movimientos} de Supabase (lectura con filtro {@code usuario_id=eq.<sesión>}, escritura
+ * con {@code usuario_id} de la sesión y {@code categoria_id} resuelto contra el catálogo
+ * {@code categorias}). Permisos y políticas RLS MVP en
+ * {@code supabase/movimientos_permisos.sql}.</p>
+ *
+ * <p><b>Respaldo:</b> {@link LocalMovimientoRepository} (SharedPreferences en el dispositivo)
+ * sigue disponible y documentado como alternativa sin red; la pantalla
+ * ({@code FinanzasFragment}) solo cambia la línea donde instancia esta interfaz.</p>
  */
 public interface MovimientoRepository {
 

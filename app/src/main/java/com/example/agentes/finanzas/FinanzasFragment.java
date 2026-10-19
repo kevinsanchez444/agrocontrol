@@ -59,8 +59,10 @@ public class FinanzasFragment extends Fragment {
         // en ese caso se muestra el título del destino como encabezado.
         binding.txtLoteNombre.setText(nombre.isEmpty() ? getString(R.string.fin_title) : nombre);
 
-        // Para conectar Supabase: reemplazar esta línea por la implementación remota.
-        repositorio = new LocalMovimientoRepository(requireContext());
+        // Libro de caja en Supabase: la implementación remota usa la tabla movimientos
+        // (usuario_id de la sesión, categoria_id del catálogo; ver
+        // supabase/movimientos_permisos.sql). LocalMovimientoRepository queda como respaldo.
+        repositorio = new SupabaseMovimientoRepository();
 
         adapter = new MovimientosAdapter();
         binding.rvMovimientos.setLayoutManager(new LinearLayoutManager(requireContext()));
