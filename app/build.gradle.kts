@@ -45,6 +45,9 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.recyclerview)
     testImplementation(libs.junit)
+    // org.json real para los tests JVM: android.jar solo trae stubs ("Stub!")
+    // y AsesorIAApi.interpretarRespuesta parsea la respuesta con org.json.
+    testImplementation("org.json:json:20240303")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.squareup.okhttp3:okhttp:4.12.0")

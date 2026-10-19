@@ -8,4 +8,12 @@ data class ResultadoIA(
 
 interface AsesorIA {
     suspend fun preguntar(mensaje: String): ResultadoIA
+
+    /**
+     * Consulta con el historial reciente de la conversación (Fase 3).
+     * Por defecto delega en [preguntar] sin contexto, de modo que el mock y
+     * cualquier doble de test siguen funcionando sin cambios.
+     */
+    suspend fun preguntar(mensaje: String, historial: List<MensajeChat>): ResultadoIA =
+        preguntar(mensaje)
 }

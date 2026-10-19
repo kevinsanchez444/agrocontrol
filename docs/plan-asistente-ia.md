@@ -57,3 +57,39 @@ Punto clave: `ChatViewModel` solo hace `private val asesor: AsesorIA = AsesorIAM
 ## 5. Estimación
 - Fases 1–3: **~4–6 días** → asistente real funcional.
 - Fase 4: mejora de valor (prioridad baja).
+
+## 6. Estado de implementación (oct 2026)
+
+Rama `feature/app-completa`. El chat de la pestaña Asesor ya habla con Gemini a
+través de una Edge Function; la clave del proveedor **no** está en el APK.
+
+### Implementado
+| Fase | Estado | Dónde |
+|---|---|---|
+| 1. Edge Function `asesor-ia` (proxy al LLM, prompt de sistema, errores tipados 429/502) | ✅ | `supabase/functions/asesor-ia/index.ts` |
+| 2. `AsesorIAApi` en la app (`HttpURLConnection`, mapeo 401/403/429/5xx/red a `ResultadoIA`) | ✅ | `app/src/main/java/com/agrocontrol/app/asesor/data/AsesorIAApi.kt` |
+| 3. Conversación con contexto (últimas 8 burbujas como `historial`; estados ENVIANDO/ENVIADO/ERROR y reintento intactos) | ✅ | `ChatViewModel` + `AsesorIA.preguntar(mensaje, historial)` |
+| 4. Contexto de lotes del usuario inyectado en el prompt | ✅ (en la función) | `contextoLotes()` en `asesor-ia/index.ts` (best-effort: si falla, responde igual) |
+
+- `ChatViewModel(private val asesor: AsesorIA = AsesorIAApi)` permite inyectar
+  `AsesorIAMock` o cualquier doble en los tests.
+- Proveedor: **Gemini**, modelo configurable por el secreto `GEMINI_MODEL`
+  (default en código: `gemini-3.5-flash-lite`).
+- Tests: `AsesorIAErrorTest` cubre las ramas puras de
+  `AsesorIAApi.interpretarRespuesta(...)` (401/403/429/500 y 200 con y sin texto).
+
+### Pendiente (para activar en el entorno real)
+1. **Desplegar** la función y fijar secretos (ver `supabase/functions/README.md`):
+   ```bash
+   supabase secrets set GEMINI_API_KEY=...      # clave del productor
+   supabase secrets set GEMINI_MODEL=...        # ID EXACTO del modelo
+   supabase functions deploy asesor-ia
+   ```
+2. **Verificar el ID exacto del modelo** antes de desplegar; si el ID no existe,
+   la function devuelve 502 y la app muestra "El asesor no está disponible":
+   ```bash
+   curl -H "x-goog-api-key: CLAVE" https://generativelanguage.googleapis.com/v1beta/models
+   ```
+3. **Rate limit por usuario** (p. ej. 20 consultas/día) como igualmente siguiente
+   paso: hoy cualquiera con la anon key (pública) puede consumir la cuota.
+4. Fallback opcional al `AsesorIAMock` si el proveedor está caído.
