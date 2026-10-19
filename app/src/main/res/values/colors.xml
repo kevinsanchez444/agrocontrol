@@ -13,13 +13,10 @@
     <color name="agro_error">#C62828</color>
     <color name="agro_on_primary">#FFFFFF</color>
 
-    <!-- Módulo Asesor IA (feature/asesor-ia): colores de las burbujas del chat -->
-    <color name="colorUsuario">#007AFF</color>
-    <color name="colorUsuarioTexto">#FFFFFF</color>
-    <color name="colorIA">#E5E5EA</color>
-    <color name="colorIAtexto">#000000</color>
+    <!-- Módulo Asesor IA: error del chat. Los colores iOS de las burbujas
+         (colorUsuario/colorIA/colorFondo y afines) se eliminaron al
+         integrar la paleta Agro en los layouts del chat. -->
     <color name="colorError">#B00020</color>
-    <color name="colorFondo">#FFFFFF</color>
 
     <!-- Módulo Finanzas (feature/finanzas): colores del libro de caja -->
     <color name="agro_ingreso">#2E7D32</color>
