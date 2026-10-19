@@ -12,4 +12,12 @@
     <color name="agro_outline">#D5DFD1</color>
     <color name="agro_error">#C62828</color>
     <color name="agro_on_primary">#FFFFFF</color>
+
+    <!-- Módulo Asesor IA (feature/asesor-ia): colores de las burbujas del chat -->
+    <color name="colorUsuario">#007AFF</color>
+    <color name="colorUsuarioTexto">#FFFFFF</color>
+    <color name="colorIA">#E5E5EA</color>
+    <color name="colorIAtexto">#000000</color>
+    <color name="colorError">#B00020</color>
+    <color name="colorFondo">#FFFFFF</color>
 </resources>
