@@ -1,20 +1,22 @@
-﻿# Archivos locales
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/deviceManager.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
 local.properties
 
-# Gradle y archivos compilados
-.gradle/
-**/.gradle/
-build/
-**/build/
-*.apk
-*.aab
-*.dex
-*.class
+# Archivo generado por Gradle (auto-provisioning de la JVM del daemon)
+/gradle/gradle-daemon-jvm.properties
 
-# Configuración del IDE
-.idea/
-*.iml
-
-# Archivos del sistema
-.DS_Store
-Thumbs.db
+# Secretos locales (nunca versionar; solo .env.example)
+.env

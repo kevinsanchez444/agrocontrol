@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.agrocontrol.app.databinding.ActivityChatBinding
+import com.example.agentes.databinding.ActivityChatBinding
 import com.agrocontrol.app.asesor.ChatViewModel
 
 class ChatActivity : AppCompatActivity() {

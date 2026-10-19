@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.agrocontrol.app.R
+import com.example.agentes.R
 import com.agrocontrol.app.asesor.data.EstadoMensaje
 import com.agrocontrol.app.asesor.data.MensajeChat
 

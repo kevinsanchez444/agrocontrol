@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta AgroControl (derivada 1:1 del CSS del prototipo, modo noche) -->
+    <color name="agro_bg">#121A12</color>
+    <color name="agro_surface">#1D281D</color>
+    <color name="agro_on_surface">#E6EFE3</color>
+    <color name="agro_muted">#93A890</color>
+    <color name="agro_primary">#66BB6A</color>
+    <color name="agro_primary_container">#27402A</color>
+    <color name="agro_outline">#2F402E</color>
+    <color name="agro_error">#EF6C6C</color>
+    <!-- Desviacion documentada del prototipo: blanco sobre #66BB6A no alcanza contraste WCAG AA -->
+    <color name="agro_on_primary">#050805</color>
+</resources>

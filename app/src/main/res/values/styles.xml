@@ -1,0 +1,92 @@
+<resources>
+    <!-- ============================================================
+         Estilos comunes AgroControl (especificacion del Arquitecto)
+         ============================================================ -->
+
+    <!-- Tarjeta de contenido: borde 1dp, esquinas 12dp (.lote del prototipo) -->
+    <style name="Widget.Agro.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@color/agro_surface</item>
+        <item name="strokeColor">@color/agro_outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="contentPadding">12dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- Tarjeta resaltada: fondo verde suave sin borde (.card del prototipo) -->
+    <style name="Widget.Agro.Card.Highlight" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/agro_primary_container</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="contentPadding">12dp</item>
+    </style>
+
+    <!-- Boton primario (.btn del prototipo) -->
+    <style name="Widget.Agro.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/agro_primary</item>
+        <item name="android:textColor">@color/agro_on_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:paddingTop">11dp</item>
+        <item name="android:paddingBottom">11dp</item>
+    </style>
+
+    <!-- Boton secundario (.btn.s del prototipo) -->
+    <style name="Widget.Agro.Button.Secondary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/agro_primary_container</item>
+        <item name="android:textColor">@color/agro_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:paddingTop">11dp</item>
+        <item name="android:paddingBottom">11dp</item>
+    </style>
+
+    <!-- Chip de cultivo (.tag del prototipo) -->
+    <style name="Widget.Agro.Chip.Cultivo" parent="">
+        <item name="android:background">@drawable/agro_chip_bg</item>
+        <item name="android:textColor">@color/agro_primary</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:paddingLeft">9dp</item>
+        <item name="android:paddingRight">9dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:layout_marginRight">6dp</item>
+    </style>
+
+    <!-- Campo de texto (input,select del prototipo) -->
+    <style name="Widget.Agro.Input" parent="">
+        <item name="android:background">@drawable/agro_input_bg</item>
+        <item name="android:textColor">@color/agro_on_surface</item>
+        <item name="android:textColorHint">@color/agro_muted</item>
+        <item name="android:padding">9dp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- Burbuja de chat (.m del prototipo) -->
+    <style name="Widget.Agro.Bubble" parent="">
+        <item name="android:background">@drawable/agro_bubble_bg</item>
+        <item name="android:textColor">@color/agro_on_surface</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">9dp</item>
+        <item name="android:paddingBottom">9dp</item>
+    </style>
+
+    <style name="TextAgro.Title" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/agro_on_surface</item>
+    </style>
+
+    <style name="TextAgro.BigNumber" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/agro_on_surface</item>
+    </style>
+
+    <style name="TextAgro.Muted" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/agro_muted</item>
+    </style>
+</resources>

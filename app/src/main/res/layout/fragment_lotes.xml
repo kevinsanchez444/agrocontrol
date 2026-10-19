@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/agro_screen_padding"
+    tools:context=".ui.lotes.LotesFragment">
+
+    <!-- Contenido real: aquí vive el módulo del Integrante 2 -->
+    <LinearLayout
+        android:id="@+id/state_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_lotes_nuevo_lista"
+            style="@style/Widget.Agro.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lotes_new" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_lotes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp"
+            tools:listitem="@layout/item_lote" />
+    </LinearLayout>
+
+    <!-- Estado vacío (estado inicial del stub) -->
+    <LinearLayout
+        android:id="@+id/state_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lotes_empty_emoji"
+            android:textSize="40sp" />
+
+        <TextView
+            style="@style/TextAgro.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@string/lotes_empty_title" />
+
+        <TextView
+            style="@style/TextAgro.Muted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@string/lotes_empty_subtitle" />
+
+        <Button
+            android:id="@+id/btn_lotes_nuevo"
+            style="@style/Widget.Agro.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/lotes_new" />
+
+        <Button
+            android:id="@+id/btn_lotes_demo"
+            style="@style/Widget.Agro.Button.Secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/lotes_demo_detail" />
+    </LinearLayout>
+
+    <!-- Estado de carga -->
+    <LinearLayout
+        android:id="@+id/state_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/TextAgro.Muted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/state_loading" />
+    </LinearLayout>
+
+    <!-- Estado de error -->
+    <LinearLayout
+        android:id="@+id/state_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/state_emoji_error"
+            android:textSize="28sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/state_error_generic"
+            android:textColor="@color/agro_error" />
+
+        <Button
+            android:id="@+id/btn_lotes_reintentar"
+            style="@style/Widget.Agro.Button.Secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/state_retry" />
+    </LinearLayout>
+</FrameLayout>
